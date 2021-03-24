@@ -1,0 +1,19 @@
+Things to remember
+
+1. Polynomial rolling hash function.
+
+String hashing : https://cp-algorithms.com/string/string-hashing.html
+
+hash(s) = (s[0] + s[1]*p + s[2]*p^2 + ... + s[n-1] * p^n-1) mod m
+
+Choice of p = (Prime number which is greater than the size of input alphabet)
+Choice of m = Large prime number (10^9 + 9)
+
+
+2. String `split` function
+Time complexity: https://softwareengineering.stackexchange.com/questions/331909/whats-the-complexity-of-javas-string-split-function#:~:text=In%20general%2C%20it's%20O%20(n,is%20the%20Thompson%20NFA%20algorithm.
+
+3. Trie data structure for T9 Mobile Problem 
+	- https://www.toptal.com/java/the-trie-a-neglected-data-structure (Best code example with a perfect interface)
+	https://protegejj.gitbook.io/oj-practices/
+
