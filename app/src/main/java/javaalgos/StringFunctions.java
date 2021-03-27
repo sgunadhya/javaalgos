@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Arrays;
 
 
 public class StringFunctions {
@@ -140,20 +141,99 @@ public class StringFunctions {
 		}
 		
 		public boolean search(String s) {
-			
+			return false;
 		}
 		
-		private boolean searchP(TrieNode n, int i, String s) {
-			if(	) {
-				return false;
+		// private boolean searchP(TrieNode n, int i, String s) {
+		// 	if(	) {
+		// 		return false;
+		// 	}
+		// 	if(i == s.length() && !n.isWord) {
+		// 		return false;
+		// 	} else if(n.isWord && i == s.length()) {
+		// 		return true;
+		// 	}else {
+		// 		return searcP(n.get(s.c))
+		// 	}
+		// }
+	}
+	
+	public static String longestPalindromicSubString(String s) {
+		if(s == null){
+			return null;
+		}
+		if(s.isEmpty()) {
+			return "";
+		}
+		
+		char[] t = new char[s.length()*2 + 3];
+		t[0]  = '$';
+		t[s.length()*2 + 2] = '@';
+		for(int i = 0, n = s.length(); i < n; i++) {
+			t[2*i + 1] = '#';
+			t[2*i + 2] = s.charAt(i);
+		}
+		int[] p = new int[t.length];
+		int c = 0;
+		int r = 0;
+		int n = s.length();
+		int maxVal = 0;
+		int maxC = 0;
+		
+		for(int i = 1; i < t.length - 1; i++) {
+			int m = 2*c - 1;
+			if(r > i){
+				p[i] = Math.max(0, Math.min(r - i, p[m]));
 			}
-			if(i == s.length() && !n.isWord) {
-				return false;
-			} else if(n.isWord && i == s.length()) {
-				return true;
-			}else {
-				return searcP(n.get(s.c))
+			
+			while(t[i + 1 + p[i]] == t[i - 1 - p[i]]) {
+				p[i] = p[i] + 1;
+			}
+			if(i + p[i] > r) {
+				c = i;
+				r = i + p[i];
+			}
+			if(p[i] > maxVal) {
+				maxVal = p[i];
+				maxC = i;
 			}
 		}
+		
+		return s.substring((maxC - 1 - maxVal)/2, (maxC - 1 + maxVal)/2);		
+		
+	}
+	
+	public static int[] maximumBorderLength(String s) {
+		int n = s.length();
+		int[] b = new int[n];
+		int k = 0;
+		for(int i = 1; i < n; i++) {
+			while(s.charAt(k) != s.charAt(i) && k > 0) {
+				k = b[k-1];
+			}
+			if(s.charAt(k) == s.charAt(i)) {
+				k++;
+			}
+			b[i] = k;
+		}
+		System.out.println(Arrays.toString(b));
+		
+		return b;
+	}
+	
+	public static int findSubstring(String s, String p) {
+		StringBuilder t = new StringBuilder(p);
+		t.append("#");
+		for(int i = 0, n = s.length(); i < n; i++) {
+			t.append(s.charAt(i));
+		}
+		int[] maxB = maximumBorderLength(t.toString());
+		int l = p.length();
+		for(int k = 0; k < maxB.length; k++) {
+			if(maxB[k] == l) {
+				return k - 2*l;
+			}
+		}
+		return -1;
 	}
 }

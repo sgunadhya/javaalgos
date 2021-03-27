@@ -61,5 +61,32 @@ public class StringFunctionsTest {
 		assertTrue(t.root.children.get('h').children.get('e').children.get('l').children.get('l').children.containsKey('o'));
 		
 	}
+
+    @Test public void testLongestPalindromicSubstringEmpty() {
+		String p = StringFunctions.longestPalindromicSubString("");
+		assertEquals("", p);
+	}
+	
+    @Test public void testLongestPalindromicSubstringNonEmpty() {
+		String p = StringFunctions.longestPalindromicSubString("tabam");
+		assertEquals("aba", p);
+	}
+
+    @Test public void testMaxBorderLen() {
+		int[] p = StringFunctions.maximumBorderLength("tabam");
+		assertEquals(5, p.length);
+		assertTrue(0 == p[0]);
+	}
+	
+    @Test public void testMaxBorderLenTrue() {
+		int[] p = StringFunctions.maximumBorderLength("lilipolilil");
+		assertTrue(0 == p[0]);
+	}
+		
+	
+    @Test public void testSubstring() {
+		int p = StringFunctions.findSubstring("testsdfghjkghj", "sdf");
+		assertTrue(4 == p);
+	}
 	
 }
