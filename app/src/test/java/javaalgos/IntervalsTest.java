@@ -31,4 +31,18 @@ public class IntervalsTest {
 		List<Intervals.Interval> r = Intervals.union(l);
 		assert(2 == r.size());
 	}
+	
+	@Test public void testIntervalCover(){
+		List<Intervals.Interval> l = new ArrayList<>();
+		l.add(new Intervals.Interval(1914, 1918));
+		l.add(new Intervals.Interval(1939, 1945));
+		l.add(new Intervals.Interval(1920, 1925));
+		l.add(new Intervals.Interval(1930, 1935));
+		l.add(new Intervals.Interval(1901, 1950));
+		l.add(new Intervals.Interval(1876, 1950));
+		l.add(new Intervals.Interval(2000, 2003));
+		List<Integer> r = Intervals.intervalCover(l);
+		assertTrue(5 == r.size());
+		
+	}
 }

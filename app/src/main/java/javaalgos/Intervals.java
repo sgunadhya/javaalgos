@@ -153,5 +153,24 @@ public class Intervals {
 		return l;
 	}
 	
+	public static List<Integer> intervalCover(List<Intervals.Interval> s) {
+		List<Integer> l = new ArrayList<>();
+		Collections.sort(s, new Comparator<Intervals.Interval>() {
+			public int compare(Intervals.Interval one, Intervals.Interval other) {
+				if(one.e == other.e) {
+					return 0;
+				}
+				return one.e > other.e ? 1 : -1;
+			}
+		});
+		for(Intervals.Interval i : s) {
+			if(l.isEmpty() ||  l.get(l.size() - 1) < i.s) {
+				l.add(i.e);
+			}
+		}
+		System.out.println(l);
+		return l;
+	}
+	
 	
 }
