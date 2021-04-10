@@ -29,6 +29,10 @@ public class BinTrees {
 		return isSymmetric(t, t);
 	}
 	
+	public static TreeNode lowestCommonAncestor(TreeNode t, int a, int b) {
+		return null;
+	}
+	
 	private static boolean isSymmetric(TreeNode tl, TreeNode tr) {
 		if(tl == tr) {
 			return true;

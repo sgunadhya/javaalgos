@@ -23,4 +23,14 @@ public class BinTreesTest {
 		assertTrue(BinTrees.isTreeSymmetric(t));
 	}
 	
+	@Test
+	public void testLowestCommonAncestor() {
+		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(2, 
+			new BinTrees.TreeNode(9, null, null), 
+				new BinTrees.TreeNode(10, null, null)), 
+					new BinTrees.TreeNode(2, new BinTrees.TreeNode(3, null, null), new BinTrees.TreeNode(4, null, null)));
+		assertNotNull(BinTrees.lowestCommonAncestor(t, 2, 3));
+	}
+	
+	
 }
