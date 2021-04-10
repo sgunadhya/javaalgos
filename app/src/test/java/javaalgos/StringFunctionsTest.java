@@ -88,5 +88,7 @@ public class StringFunctionsTest {
 		int p = StringFunctions.findSubstring("testsdfghjkghj", "sdf");
 		assertTrue(4 == p);
 	}
+
+
 	
 }

@@ -119,7 +119,10 @@ public class Intervals {
 		
 		public int compareTo(IV other) {
 			if(this.v == other.v) {
-				return 0;
+				if(this.isStart == other.isStart) {
+					return 0;
+				}
+				return this.isStart? 1 : -1;
 			}
 			return this.v > other.v ? 1 : -1;
 		}
