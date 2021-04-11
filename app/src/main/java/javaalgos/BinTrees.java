@@ -67,7 +67,32 @@ public class BinTrees {
 	}
 	
 	public static TreeNodeP lowestCommonAncestorWithParent(TreeNodeP root, TreeNodeP i, TreeNodeP j) {
-		return null;
+		int d1 = depth(i);
+		int d2 = depth(j);
+		if(d2 > d1) {
+			TreeNodeP temp = i;
+			i = j;
+			j = temp;
+		}
+		int diff = Math.abs(d1 - d2);
+		while(diff > 0) {
+			i = i.parent;
+			diff--;
+		}
+		while(i != j) {
+			i = i.parent;
+			j = j.parent;			
+		}
+		return i;
+	}
+	
+	private static int depth(TreeNodeP n) {
+		int d = 0;
+		while(n.parent != null) {
+			d++;
+			n = n.parent;
+		}
+		return d;
 	}
 	
 	private static LCAResult lca(TreeNode t, int a, int b) {
