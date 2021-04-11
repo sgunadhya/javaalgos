@@ -12,6 +12,22 @@ public class BinTrees {
 		}
 	}
 	
+	public static class TreeNodeP {
+		int v;
+		TreeNodeP left;
+		TreeNodeP right;
+		TreeNodeP parent;
+		public TreeNodeP(int v) {
+			this.v = v;
+		}
+		
+		public TreeNodeP(int v, TreeNodeP l, TreeNodeP r, TreeNodeP	 p) {
+			this.v = v;
+			this.left = l;
+			this.right = r;
+			this.parent = p;
+		}
+	}
 	public static class BResult {
 		int h;
 		boolean r;
@@ -48,6 +64,10 @@ public class BinTrees {
 		LCAResult r = lca(t, a, b);
 		// System.out.println(r);
 		return r.parent;
+	}
+	
+	public static TreeNodeP lowestCommonAncestorWithParent(TreeNodeP root, TreeNodeP i, TreeNodeP j) {
+		return null;
 	}
 	
 	private static LCAResult lca(TreeNode t, int a, int b) {

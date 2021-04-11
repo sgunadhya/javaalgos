@@ -31,8 +31,45 @@ public class BinTreesTest {
 					new BinTrees.TreeNode(2, new BinTrees.TreeNode(3, null, null), new BinTrees.TreeNode(4, null, null)));
 		BinTrees.TreeNode n = BinTrees.lowestCommonAncestor(t, 2, 3);
 		assertNotNull(n);
-		assertEquals(n.v, 1);
+		assertEquals(n.v, 2);
 	}
+	
+	@Test
+	public void testLowestCommonAncestorWithP() {
+		BinTrees.TreeNodeP root = new BinTrees.TreeNodeP(1);
+		BinTrees.TreeNodeP leftR = new BinTrees.TreeNodeP(2);
+		BinTrees.TreeNodeP rightR = new BinTrees.TreeNodeP(3);
+		BinTrees.TreeNodeP leftRL = new BinTrees.TreeNodeP(4);
+	    BinTrees.TreeNodeP leftRR = new BinTrees.TreeNodeP(5);
+		
+		root.parent = null;
+		root.left = leftR;
+		root.right = rightR;
+		
+		leftR.parent = root;
+		leftR.left = leftRL;
+		leftR.right = leftRR;
+		
+		rightR.parent = root;
+		rightR.left = null;
+		rightR.right = null;
+		
+		leftRL.left = null;
+		leftRL.right = null;
+		leftRL.parent = leftR;		
+		
+		leftRR.left = null;
+		leftRR.right = null;
+		leftRR.parent = leftR;
+		
+		
+		BinTrees.TreeNodeP n = BinTrees.lowestCommonAncestorWithParent(root, rightR, leftRR);
+		assertNotNull(n);
+		assertEquals(root, n);		
+				
+	}
+	
+	
 	
 	
 }
