@@ -92,6 +92,22 @@ public class BinTrees {
 		return l;
 	}
 	
+	public static boolean targetSum(TreeNode t, int target) {
+		return targetS(t, 0, target);
+	}
+	
+	private static boolean targetS(TreeNode t, int partSum, int target) {
+		if(t == null) {
+			return false;
+		}
+		partSum += t.v;
+		if(t.left == null && t.right == null) {
+			System.out.println(partSum);
+			return partSum == target;
+		}
+		return targetS(t.left, partSum, target) || targetS(t.right, partSum, target);
+	}
+	
 	private static int getSums(TreeNode t, int partSum, List<Integer> sums) {
 		if(t == null) {
 			return 0;
