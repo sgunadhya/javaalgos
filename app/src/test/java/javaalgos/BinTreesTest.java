@@ -80,6 +80,16 @@ public class BinTreesTest {
 	}
 	
 	
+	@Test
+	public void testTargetSum() {
+		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(0, 
+			new BinTrees.TreeNode(2, null, null), 
+				new BinTrees.TreeNode(3, null, null)), 
+					new BinTrees.TreeNode(7, null, null));
+		assertTrue(BinTrees.targetSum(t, 6));		
+	}
+	
+	
 	
 	
 }
