@@ -1,4 +1,5 @@
 package javaalgos;
+import java.util.*;
 
 public class BinTrees {
 	public static class TreeNode {
@@ -85,6 +86,15 @@ public class BinTrees {
 		}
 		return i;
 	}
+	public static List<Integer> sumsOfBinNumbers(TreeNode t) {
+		List<Integer> l = new ArrayList<>();
+		return l;
+	}
+	
+	
+	
+	
+	
 	
 	private static int depth(TreeNodeP n) {
 		int d = 0;

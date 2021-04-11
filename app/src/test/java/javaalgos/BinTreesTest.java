@@ -69,6 +69,16 @@ public class BinTreesTest {
 				
 	}
 	
+	@Test
+	public void testSumBinaryNumbers() {
+		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(0, 
+			new BinTrees.TreeNode(1, null, null), 
+				new BinTrees.TreeNode(0, null, null)), 
+					new BinTrees.TreeNode(0, null, null));
+		List<Integer> l = BinTrees.sumsOfBinNumbers(t);
+		assertTrue(l.size() == 3);
+	}
+	
 	
 	
 	
