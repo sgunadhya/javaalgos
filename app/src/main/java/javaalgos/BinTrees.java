@@ -88,9 +88,23 @@ public class BinTrees {
 	}
 	public static List<Integer> sumsOfBinNumbers(TreeNode t) {
 		List<Integer> l = new ArrayList<>();
+		getSums(t, 0, l);
 		return l;
 	}
 	
+	private static int getSums(TreeNode t, int partSum, List<Integer> sums) {
+		if(t == null) {
+			return 0;
+		}
+		partSum = 2*partSum + t.v;
+		if(t.left == null && t.right == null) {
+			sums.add(partSum);
+		}
+		
+		return getSums(t.left, partSum, sums) +
+		getSums(t.right, partSum, sums);
+
+	}
 	
 	
 	
