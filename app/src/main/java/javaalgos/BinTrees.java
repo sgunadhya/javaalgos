@@ -21,6 +21,21 @@ public class BinTrees {
 		}
 	}
 	
+	public static class LCAResult {
+		int n;
+		TreeNode parent;
+		
+		public LCAResult(int n, TreeNode p) {
+			this.n = n;
+			this.parent = p;
+		}
+		
+		public String toString() {
+			return this.n + "...." + this.parent.v; 
+		}
+			
+	}
+	
 	public static boolean isTreeBalanced(TreeNode t) {		
 		return isBalanced(t).r;
 	}
@@ -30,7 +45,29 @@ public class BinTrees {
 	}
 	
 	public static TreeNode lowestCommonAncestor(TreeNode t, int a, int b) {
-		return null;
+		LCAResult r = lca(t, a, b);
+		// System.out.println(r);
+		return r.parent;
+	}
+	
+	private static LCAResult lca(TreeNode t, int a, int b) {
+		if(t == null) {
+			return new LCAResult(0, null);
+		}
+		LCAResult left = lca(t.left, a, b);
+		if(left.n == 2) {
+			return left;
+		}
+		LCAResult right = lca(t.right, a, b);
+		if(right.n == 2) {
+			return right;
+		}
+		
+		int n = left.n + right.n + (t.v == a ? 1 :0) + (t.v == b? 1 : 0);
+		return new LCAResult(n, n == 2 ? t : null);
+		
+		
+		
 	}
 	
 	private static boolean isSymmetric(TreeNode tl, TreeNode tr) {

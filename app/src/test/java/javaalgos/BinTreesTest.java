@@ -25,11 +25,13 @@ public class BinTreesTest {
 	
 	@Test
 	public void testLowestCommonAncestor() {
-		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(2, 
+		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(7, 
 			new BinTrees.TreeNode(9, null, null), 
 				new BinTrees.TreeNode(10, null, null)), 
 					new BinTrees.TreeNode(2, new BinTrees.TreeNode(3, null, null), new BinTrees.TreeNode(4, null, null)));
-		assertNotNull(BinTrees.lowestCommonAncestor(t, 2, 3));
+		BinTrees.TreeNode n = BinTrees.lowestCommonAncestor(t, 2, 3);
+		assertNotNull(n);
+		assertEquals(n.v, 1);
 	}
 	
 	
