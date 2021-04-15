@@ -96,6 +96,11 @@ public class BinTrees {
 		return targetS(t, 0, target);
 	}
 	
+	public static void inOrderTraversal(TreeNode t){
+		Stack<TreeNode> s = new Stack<>();
+		
+	}
+	
 	private static boolean targetS(TreeNode t, int partSum, int target) {
 		if(t == null) {
 			return false;
