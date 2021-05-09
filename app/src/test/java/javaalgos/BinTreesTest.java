@@ -89,15 +89,15 @@ public class BinTreesTest {
 		assertTrue(BinTrees.targetSum(t, 4));		
 	}
 	
-	@Test
-	public void testInOrderIterative() {
-		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(0, 
-			new BinTrees.TreeNode(2, null, null), 
-				new BinTrees.TreeNode(3, null, null)), 
-					new BinTrees.TreeNode(7, null, null));
-		BinTrees.inOrderInterative(t);
-		
-	}
+	// @Test
+// 	public void testInOrderIterative() {
+// 		BinTrees.TreeNode t = new BinTrees.TreeNode(1, new BinTrees.TreeNode(0,
+// 			new BinTrees.TreeNode(2, null, null),
+// 				new BinTrees.TreeNode(3, null, null)),
+// 					new BinTrees.TreeNode(7, null, null));
+// 		BinTrees.inOrderInterative(t);
+//
+// 	}
 	
 	
 	
