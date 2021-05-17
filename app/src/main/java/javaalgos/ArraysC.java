@@ -129,5 +129,28 @@ public class ArraysC {
 			return t;
 		}
 	}
+	
+	public static void dutchFlag(int[] flag, int middle) {
+		int s = 0;
+		int e = 0;
+		int l = flag.length;
+		int tmp;
+		while(e < l) {
+			if(flag[e] < middle) {
+				tmp = flag[s];
+				flag[s] = flag[e];
+				flag[e] = tmp;
+				s++;
+				e++;
+			}else if(flag[e] > middle) {
+				l--;
+				tmp = flag[l];
+				flag[l] = flag[e];
+				flag[e] = tmp;
+			}else {
+				e++;
+			}
+		}			
+	}
   
 }

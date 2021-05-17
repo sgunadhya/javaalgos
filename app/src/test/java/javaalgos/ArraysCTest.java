@@ -32,4 +32,22 @@ public class ArraysCTest {
 		ArraysC.Fenwick r = new ArraysC.Fenwick(new int[]{23,4,5,56,6,1,11,2});
 		assertTrue(27 == r.prefixSum(1));
 	}	 	 
+	
+	@Test public void testDutchNationalFlag() {
+		int[] flag = new int[] {3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1};
+		ArraysC.dutchFlag(flag, 2);
+		assertTrue("1st index did not work",flag[0] == 1);
+		assertTrue("2nd index did not work",flag[1] == 1);
+		assertTrue("3rd index did not work",flag[2] == 1);
+		assertTrue("4th index did not work",flag[3] == 1);
+		assertTrue("5th index did not work",flag[4] == 1);
+		assertTrue("6th index did not work",flag[5] == 1);
+		assertTrue("7th index did not work",flag[6] == 2);
+		assertTrue("8th index did not work",flag[7] == 2);
+		assertTrue("9th index did not work",flag[8] == 2);
+		assertTrue("10th index did not work",flag[9] == 3);
+		assertTrue("11th index did not work",flag[10] == 3);
+		assertTrue("12th index did not work",flag[11] == 3);
+		assertTrue("13th index did not work",flag[12] == 3);
+	}
 }

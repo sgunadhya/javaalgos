@@ -28,3 +28,11 @@ application {
     // Define the main class for the application.
     mainClass.set("javaalgos.App")
 }
+
+tasks {
+    test {                                  
+        testLogging.showExceptions = true
+		testLogging.showStandardStreams = true
+		testLogging.events("failed")
+    }
+}
