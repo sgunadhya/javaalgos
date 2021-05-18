@@ -152,5 +152,28 @@ public class ArraysC {
 			}
 		}			
 	}
+	
+	public static void removeDuplicatesFromSortedArray(int[] a) {
+		int u = 1;
+		for(int i = 1; i < a.length; i++) {
+			if(a[i] != a[u-1]) {
+				a[u] = a[i];
+				u++;
+			}
+		}
+		for(int j = u; j < a.length; j ++) {
+			a[j] = 0;
+		}		
+	}
+	
+	public static int maximumProfit(int[] prices) {
+		int profit = 0;
+		int minPrice = Integer.MAX_VALUE;
+		for(int i = 0; i < prices.length; i++) {
+			profit = Math.max(profit, prices[i] - minPrice);
+			minPrice = Math.min(minPrice, prices[i]);
+		}
+		return profit;
+	}
   
 }
