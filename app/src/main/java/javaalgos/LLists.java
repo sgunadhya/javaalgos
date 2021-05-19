@@ -65,4 +65,9 @@ public class LLists {
 		}
 		return false;
 	}
+	
+	public static void deleteNode(ListNode a) {
+		a.data = a.next.data;
+		a.next = a.next.next;
+	}
 }

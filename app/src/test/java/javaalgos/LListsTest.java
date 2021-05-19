@@ -68,5 +68,20 @@ public class LListsTest {
 		assertTrue("The linked list has cycles", hasCycle);
 	}
 	
+	@Test public void testDeleteNodeFromLinkedList() {
+		LLists.ListNode a = new LLists.ListNode(2);
+		LLists.ListNode b = new LLists.ListNode(4);
+		LLists.ListNode c = new LLists.ListNode(6);
+		LLists.ListNode d = new LLists.ListNode(8);
+		LLists.ListNode e = new LLists.ListNode(10);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		LLists.deleteNode(c); 
+		assertFalse("Value of c should be as d", c.data == 6);
+		assertTrue(c.next == e);
+	}
+	
 
 }
