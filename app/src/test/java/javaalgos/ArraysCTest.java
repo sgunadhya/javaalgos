@@ -62,9 +62,19 @@ public class ArraysCTest {
 		}
 	}
 	
+	@Test public void testDeleteRepeatedValuesFromSortedArrayWithOneElement() {
+		int[] a = new int[]{2,2,2,2,2,2,2,2};
+		ArraysC.removeDuplicatesFromSortedArray(a);
+		
+		int[] r = new int[]{2,0,0,0,0,0,0,0};
+		for(int i = 0; i < r.length; i++) {
+			assertTrue("i-th result does not match i:"+i, a[i] == r[i]);
+		}
+	}
+	
 	@Test public void testFindMaxProfit() {
 		int[] prices = new int[] {310,315,275,295,260,270,290,230,255,250};
 		int profit = ArraysC.maximumProfit(prices);
-		assertTrue("Maximum profit should be 30 instead it is :"+profit, profit == 30);
+		assertTrue("Maximum profit should be 30 instead it is : "+profit, profit == 30);
 	}
 }
