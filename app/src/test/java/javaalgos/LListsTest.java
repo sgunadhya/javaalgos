@@ -1,10 +1,23 @@
 package javaalgos;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class LListsTest {
 	
 	LLists.ListNode a;
+	
+	@Before public void init() {
+		this.a = new LLists.ListNode(2);
+		LLists.ListNode b = new LLists.ListNode(4);
+		LLists.ListNode c = new LLists.ListNode(6);
+		LLists.ListNode d = new LLists.ListNode(8);
+		LLists.ListNode e = new LLists.ListNode(10);
+		this.a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;	
+	}
 	
 	@Test public void testMergeSortedLinkedLists() {
 		LLists.ListNode a = new LLists.ListNode(2);
@@ -81,6 +94,11 @@ public class LListsTest {
 		LLists.deleteNode(c); 
 		assertFalse("Value of c should be as d", c.data == 6);
 		assertTrue(c.next == e);
+	}
+	
+	@Test public void testDeleteKthLastElementFromLinkedList() {
+		LLists.deleteKthLast(this.a, 2);
+		assertTrue("2nd last element should be deleted "+this.a.next.next.next.data,this.a.next.next.next.data == 10);
 	}
 	
 

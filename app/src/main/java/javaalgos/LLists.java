@@ -70,4 +70,18 @@ public class LLists {
 		a.data = a.next.data;
 		a.next = a.next.next;
 	}
+	
+	public static void deleteKthLast(ListNode a, int k) {
+		ListNode dummyNode = new ListNode(0, a);
+		ListNode first = dummyNode.next;
+		while(k-- > 0) {
+			first = first.next;
+		}
+		ListNode second = dummyNode.next;
+		while(first != null) {
+			first = first.next;
+			second = second.next;
+		}
+		deleteNode(second);
+	}
 }
