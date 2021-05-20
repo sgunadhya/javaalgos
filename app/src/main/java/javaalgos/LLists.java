@@ -84,4 +84,17 @@ public class LLists {
 		}
 		deleteNode(second);
 	}
+	
+	public static void removeDuplicates(ListNode a) {
+		ListNode iter = a; 
+		ListNode u;
+		while(iter != null) {
+			u = iter.next;
+			while(u != null && u.data == iter.data) {
+				u = u.next;
+			}
+			iter.next = u;
+			iter = u;
+		}
+	}
 }

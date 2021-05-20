@@ -101,5 +101,20 @@ public class LListsTest {
 		assertTrue("2nd last element should be deleted "+this.a.next.next.next.data,this.a.next.next.next.data == 10);
 	}
 	
+	@Test public void testRemoveDuplicateValuesFromLinkedList() {
+		LLists.ListNode a = new LLists.ListNode(2);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(4);
+		LLists.ListNode d = new LLists.ListNode(4);
+		LLists.ListNode e = new LLists.ListNode(8);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		LLists.removeDuplicates(a);
+		assertTrue(a.next.data == 4);
+		assertTrue(a.next.next.data == 8);
+	}
+	
 
 }
