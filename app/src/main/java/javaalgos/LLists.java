@@ -12,6 +12,10 @@ public class LLists {
 			this.data = data;
 			this.next = l;
 		}
+		
+		public String toString() {
+			return " "+data;
+		}
 	}
 	
 	public static ListNode mergeSortedLinkedLists(ListNode a, ListNode b) {
@@ -96,5 +100,23 @@ public class LLists {
 			iter.next = u;
 			iter = u;
 		}
+	}
+	
+	public static ListNode cyclicShift(ListNode a, int k) {
+		ListNode tail = a;
+		int n = 1;
+		while(tail.next != null) {
+			tail = tail.next;
+			n++;
+		}
+		tail.next = a;
+		int steps = n - (k % n);
+		ListNode newTail = tail;
+		while(steps-- > 0) {
+			newTail = newTail.next;
+		}
+		ListNode newHead = newTail.next;
+		newTail.next = null;
+		return newHead;
 	}
 }

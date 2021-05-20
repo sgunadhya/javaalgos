@@ -116,5 +116,24 @@ public class LListsTest {
 		assertTrue(a.next.next.data == 8);
 	}
 	
+	
+	@Test public void testCyclicShiftLinkedList() {
+		LLists.ListNode a = new LLists.ListNode(1);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(3);
+		LLists.ListNode d = new LLists.ListNode(4);
+		LLists.ListNode e = new LLists.ListNode(5);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		LLists.ListNode a1 = LLists.cyclicShift(a, 2);
+		assertTrue("1 "+a1.data,a1.data == 4);
+		assertTrue("2",a1.next.data == 5);
+        assertTrue("3",a1.next.next.data == 1);
+		assertTrue("4",a1.next.next.next.data == 2);
+		assertTrue("5",a1.next.next.next.next.data == 3);
+	}
+	
 
 }
