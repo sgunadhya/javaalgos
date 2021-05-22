@@ -119,4 +119,25 @@ public class LLists {
 		newTail.next = null;
 		return newHead;
 	}
+	
+	public static ListNode evenOddMerge(ListNode a) {
+		ListNode evenDummyHead = new ListNode(0);
+		ListNode oddDummyHead = new ListNode(0);
+		ListNode evenDummyIter = evenDummyHead;
+		ListNode oddDummyIter = oddDummyHead;
+		boolean isEven = false;
+		for(ListNode iter = a; iter != null ; iter = iter.next) {
+			if(isEven) {
+				evenDummyIter.next = iter;
+				evenDummyIter = evenDummyIter.next;
+			}else {
+				oddDummyIter.next = iter;
+				oddDummyIter = oddDummyIter.next;				
+			}
+			isEven = !isEven;
+		}
+		oddDummyIter.next = null;
+		evenDummyIter.next = oddDummyHead.next;
+		return evenDummyHead.next;
+	}
 }

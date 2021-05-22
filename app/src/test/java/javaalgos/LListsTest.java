@@ -135,5 +135,23 @@ public class LListsTest {
 		assertTrue("5",a1.next.next.next.next.data == 3);
 	}
 	
+	@Test public void testEvenOddMerge() {
+		LLists.ListNode a = new LLists.ListNode(1);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(3);
+		LLists.ListNode d = new LLists.ListNode(4);
+		LLists.ListNode e = new LLists.ListNode(5);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		LLists.ListNode r = LLists.evenOddMerge(a);
+		assertTrue(r.data == 2);
+		assertTrue(r.next.data == 4);
+		assertTrue(r.next.next.data == 1);
+		assertTrue(r.next.next.next.data == 3);
+		assertTrue(r.next.next.next.next.data == 5);		
+	}
+	
 
 }
