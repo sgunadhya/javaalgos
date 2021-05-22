@@ -140,4 +140,18 @@ public class LLists {
 		evenDummyIter.next = oddDummyHead.next;
 		return evenDummyHead.next;
 	}
+	
+	public static boolean isPalindrome(ListNode a) {
+		java.util.Stack<Integer> s = new java.util.Stack();
+		for(ListNode iter = a; iter != null; iter = iter.next) {
+			s.push(iter.data);
+		}
+		for(ListNode iter = a; iter != null; iter = iter.next) {
+			if(iter.data != s.pop()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

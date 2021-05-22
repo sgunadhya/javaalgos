@@ -153,5 +153,19 @@ public class LListsTest {
 		assertTrue(r.next.next.next.next.data == 5);		
 	}
 	
+	@Test public void testIsLinkedListPalindromic() {
+		LLists.ListNode a = new LLists.ListNode(1);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(3);
+		LLists.ListNode d = new LLists.ListNode(2);
+		LLists.ListNode e = new LLists.ListNode(1);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		assertTrue(LLists.isPalindrome(a));
+		
+	}
+	
 
 }
