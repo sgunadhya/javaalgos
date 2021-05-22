@@ -164,8 +164,25 @@ public class LListsTest {
 		c.next = d;
 		d.next = e;
 		assertTrue(LLists.isPalindrome(a));
-		
 	}
 	
+	@Test public void testLinkedListPivoting() {
+		LLists.ListNode a = new LLists.ListNode(3);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(3);
+		LLists.ListNode d = new LLists.ListNode(1);
+		LLists.ListNode e = new LLists.ListNode(3);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		LLists.ListNode a1 = LLists.pivotLinkedList(a, 2);
+		assertTrue(a1.data == 1);
+		assertTrue(a1.next.data == 2);
+		assertTrue(a1.next.next.data == 3);
+		assertTrue(a1.next.next.next.data == 3);
+		assertTrue(a1.next.next.next.next.data == 3);
+	}
+	 
 
 }

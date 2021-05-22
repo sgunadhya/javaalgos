@@ -154,4 +154,31 @@ public class LLists {
 		
 		return true;
 	}
+	
+	public static ListNode pivotLinkedList(ListNode a, int pivot) {
+		ListNode lt = new ListNode(0, null);
+		ListNode eq = new ListNode(0, null);
+		ListNode grt = new ListNode(0, null);
+		
+		ListNode ltIter = lt;
+		ListNode eqIter = eq;
+		ListNode grtIter = grt;
+		
+		for(ListNode iter = a; iter != null; iter = iter.next) {
+			if(iter.data < pivot) {
+				ltIter.next = iter;
+				ltIter = iter;
+			}else if(iter.data == pivot) {
+				eqIter.next = iter;
+				eqIter = iter;
+			}else {
+				grtIter.next = iter;
+				grtIter = iter;
+			}
+		}
+		grtIter.next = null;
+		eqIter.next = grt.next;
+		ltIter.next = eq.next;
+		return lt.next;
+	}
 }
