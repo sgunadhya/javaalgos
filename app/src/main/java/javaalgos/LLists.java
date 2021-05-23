@@ -181,4 +181,30 @@ public class LLists {
 		ltIter.next = eq.next;
 		return lt.next;
 	}
+	
+	public static ListNode addTwoNumbers(ListNode a, ListNode b) {
+		ListNode dummyHead = new ListNode(0, null);
+		ListNode iter = dummyHead;
+		int carry = 0;
+		while(a != null || b != null) {
+			int s = carry;
+			if(a != null) {
+				s += a.data;
+				a = a.next;
+			}
+			
+			if(b != null) {
+				s += b.data;
+				b = b.next;
+			}
+		
+			iter.next = new ListNode(s % 10);
+			carry = s / 10;
+			iter = iter.next;
+		}
+		if(carry > 0) {
+			iter.next = new ListNode(carry, null);
+		}
+		return dummyHead.next;
+	}
 }

@@ -183,6 +183,35 @@ public class LListsTest {
 		assertTrue(a1.next.next.next.data == 3);
 		assertTrue(a1.next.next.next.next.data == 3);
 	}
+	
+	@Test public void testAddTwoNumbersRepresentedAsLinkedLists() {
+		LLists.ListNode a = new LLists.ListNode(3);
+		LLists.ListNode b = new LLists.ListNode(2);
+		LLists.ListNode c = new LLists.ListNode(3);
+		LLists.ListNode d = new LLists.ListNode(1);
+		LLists.ListNode e = new LLists.ListNode(3);
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = e;
+		
+		LLists.ListNode a1 = new LLists.ListNode(4);
+		LLists.ListNode b1 = new LLists.ListNode(1);
+		LLists.ListNode c1 = new LLists.ListNode(4);
+		LLists.ListNode d1 = new LLists.ListNode(9);
+		LLists.ListNode e1 = new LLists.ListNode(1);
+		a1.next = b1;
+		b1.next = c1;
+		c1.next = d1;
+		d1.next = e1;
+		
+		LLists.ListNode r = LLists.addTwoNumbers(a, a1);
+		assertTrue(r.data == 7);
+		assertTrue(r.next.data == 3);
+		assertTrue(r.next.next.data == 7);
+		assertTrue(r.next.next.next.data == 0);
+		assertTrue(r.next.next.next.next.data == 5);
+	}
 	 
 
 }
