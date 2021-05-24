@@ -15,4 +15,16 @@ public class BSTs {
 			this.left = left;
 		}
 	}
+	
+	public static boolean isValidBST(BSTNode a) {
+		return false;
+	}
+	
+	public static int findFirstKeyGreaterThan(BSTNode a, int k) {
+		return 0;
+	}
+	
+	public static BSTNode findLCA(BSTNode t, BSTNode a, BSTNode b) {
+		return t;
+	}
 }
