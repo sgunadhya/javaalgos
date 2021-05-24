@@ -1,5 +1,6 @@
 package javaalgos;
 
+import java.util.List;
 public class BSTs {
 	
 	public static class BSTNode {
@@ -26,5 +27,17 @@ public class BSTs {
 	
 	public static BSTNode findLCA(BSTNode t, BSTNode a, BSTNode b) {
 		return t;
+	}
+	
+	public static BSTNode buildMinHeightBST(int[] a) {
+		return null;
+	}
+	
+	public static List<Integer> kLargest(BSTNode a, int k) {
+		return null;
+	}
+	
+	public static List<Integer> closesEntries(int[] a, int[] b, int[] c) {
+		return null;
 	}
 }

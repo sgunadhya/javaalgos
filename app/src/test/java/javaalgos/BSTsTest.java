@@ -34,7 +34,11 @@ public class BSTsTest {
 	}
 	
 	@Test public void testFindkLargestElements() {
-		
+		List<Integer> r = BSTs.kLargest(a, 3);
+
+		assertTrue(r.contains(53));
+		assertTrue(r.contains(47));
+		assertTrue(r.contains(43));
 	}
 	
 	@Test public void testGetLCAofTwoNodes() {
@@ -46,7 +50,9 @@ public class BSTsTest {
 	}
 	
 	@Test public void testClosestEntriesInSortedArrays() {
-		
+		List<Integer> r = BSTs.closesEntries(new int[]{5,10,15}, new int[]{3,6,9,12,15}, new int[]{8,16,24});
+		assertTrue(r.contains(15));
+		assertTrue(r.contains(16));
 	}
 	
 	@Test public void testMostVisitedPages() {
@@ -54,7 +60,8 @@ public class BSTsTest {
 	}
 	
 	@Test public void testMinimumHeightBSTFromASortedArray() {
-		
+		BSTs.BSTNode r = BSTs.buildMinHeightBST(new int[]{2,3,5,7,11,13,17,19,23});
+		assertTrue(r.data == 11);
 	}
 	
 	@Test public void testIfThreeBSTNodesAreTotallyOrdered() {
