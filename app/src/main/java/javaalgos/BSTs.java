@@ -18,7 +18,18 @@ public class BSTs {
 	}
 	
 	public static boolean isValidBST(BSTNode a) {
-		return false;
+		return areKeysInRange(a, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+	
+	private static boolean areKeysInRange(BSTNode a, Integer lower, Integer upper) {
+		if(a == null) {
+			return true;
+		}else if(Integer.compare(a.data, lower) < 0 || Integer.compare(a.data, upper) > 0) {
+			return false;
+		}else {
+			return areKeysInRange(a.right, a.data, upper)
+				&& areKeysInRange(a.left, lower, a.data);
+		}
 	}
 	
 	public static int findFirstKeyGreaterThan(BSTNode a, int k) {
