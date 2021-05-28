@@ -1,6 +1,7 @@
 package javaalgos;
 
 import java.util.List;
+import java.util.ArrayList;
 public class BSTs {
 	
 	public static class BSTNode {
@@ -55,7 +56,19 @@ public class BSTs {
 	}
 	
 	public static List<Integer> kLargest(BSTNode a, int k) {
-		return null;
+		List<Integer> r = new ArrayList<>();
+		kLargestHelper(a, k, r);
+		return r;
+	}
+	
+	private static void kLargestHelper(BSTNode a, int k, List<Integer> r) {
+		if(a != null && r.size() < k) {
+			kLargestHelper(a.right, k, r);
+			if(r.size() < k) {
+				r.add(a.data);
+				kLargestHelper(a.left, k, r);
+			}
+		}
 	}
 	
 	public static List<Integer> closesEntries(int[] a, int[] b, int[] c) {
