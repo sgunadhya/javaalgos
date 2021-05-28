@@ -48,7 +48,19 @@ public class BSTs {
 	}
 	
 	public static BSTNode findLCA(BSTNode t, BSTNode a, BSTNode b) {
-		return t;
+		BSTNode h = a.data > b.data ? a : b;
+		BSTNode l = a.data > b.data ? b : a;
+		BSTNode s = t;
+		while(s.data < l.data || s.data > h.data) {
+			while(s.data < l.data) {
+				s = s.right;
+			}
+			
+			while(s.data > h.data) {
+				s = s.left;
+			}
+		}
+		return s;
 	}
 	
 	public static BSTNode buildMinHeightBST(int[] a) {
