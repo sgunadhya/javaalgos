@@ -33,7 +33,17 @@ public class BSTs {
 	}
 	
 	public static int findFirstKeyGreaterThan(BSTNode a, int k) {
-		return 0;
+		BSTNode subtree = a;
+		BSTNode r = null;
+		while(subtree != null) {
+			if(subtree.data > k) {
+				r = subtree;
+				subtree = subtree.left;
+			}else {
+				subtree = subtree.right;
+			}
+		}
+		return r.data;
 	}
 	
 	public static BSTNode findLCA(BSTNode t, BSTNode a, BSTNode b) {
