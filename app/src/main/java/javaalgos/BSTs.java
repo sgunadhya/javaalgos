@@ -64,7 +64,15 @@ public class BSTs {
 	}
 	
 	public static BSTNode buildMinHeightBST(int[] a) {
-		return null;
+		return minHeightBSTHelper(a, 0, a.length);
+	}
+	
+	private static BSTNode minHeightBSTHelper(int[] a, int s, int e) {
+		if(s >= e) {
+			return null;
+		}
+		int mid = s + (e - s)/2;
+		return new BSTNode(a[mid], minHeightBSTHelper(a, s, mid), minHeightBSTHelper(a, mid + 1, e));
 	}
 	
 	public static List<Integer> kLargest(BSTNode a, int k) {
