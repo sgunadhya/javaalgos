@@ -69,7 +69,11 @@ public class BSTsTest {
 	}
 	
 	@Test public void testLookupRange() {
-		
+		List<Integer> r = BSTs.findInRange(a, 16, 31);
+		int[] x = new int[] {17,19,23,29,31};
+		for(int i = 0; i < x.length; i++) {
+			assertTrue("r should contain "+x[i], r.contains(x[i]));
+		}
 	}
 	
 	@Test public void testAdditionalCreditsProblem() {

@@ -92,6 +92,10 @@ public class BSTs {
 	}
 	
 	public static List<Integer> closesEntries(int[] a, int[] b, int[] c) {
-		return null;
+		return new ArrayList<>();
+	}
+	
+	public static List<Integer> findInRange(BSTNode a, int s, int e) {
+		return new ArrayList<>();
 	}
 }
