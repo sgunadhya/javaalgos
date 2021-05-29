@@ -96,6 +96,23 @@ public class BSTs {
 	}
 	
 	public static List<Integer> findInRange(BSTNode a, int s, int e) {
-		return new ArrayList<>();
+		List<Integer> r = new ArrayList<>();
+		findInRangeHelper(a, s, e, r);
+		return r;
+	}
+	
+	public static void findInRangeHelper(BSTNode a, int s, int e, List<Integer> r) {
+		if(a == null) {
+			return;
+		}
+		if(a.data >= s && a.data <= e) {
+			findInRangeHelper(a.left, s, e, r);
+			r.add(a.data);
+			findInRangeHelper(a.right, s, e, r);
+		}else if(a.data < s) {
+			findInRangeHelper(a.right, s, e, r);
+		}else {
+			findInRangeHelper(a.left, s, e, r);
+		}
 	}
 }
