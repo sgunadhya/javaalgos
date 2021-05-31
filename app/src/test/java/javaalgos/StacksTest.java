@@ -18,4 +18,27 @@ public class StacksTest {
 		assertFalse(Stacks.isWellFormed(notWellFormed));
 		assertTrue(Stacks.isWellFormed(wellFormed));
 	}
+	
+	@Test public void testNormalizePathNames() {
+		Map<String, String> tests = new HashMap<>();
+		tests.put("/home/", "/home");
+		tests.put("/a/./b/../../c/", "/c");
+		tests.put("/../../../../../a", "/a");
+		tests.put("/a/./b/./c/./d/", "/a/b/c/d");
+		for(Map.Entry<String, String> t : tests.entrySet()) {
+			assertEquals(Stacks.normalizePathName(t.getKey()), t.getValue());
+		}
+	}
+	
+	@Test public void testBuildingsWithSunsetView() {
+		assertTrue(Stacks.buildingsWithSunsetView(new int[] {7, 4, 8, 2, 9}) == 3);
+	}
+	
+	@Test public void testStackWithMax() {
+		Stacks.StackWithMax k = new Stacks.StackWithMax();
+		k.push(4);
+		k.push(12);
+		k.push(1);
+		assertTrue(Integer.compare(k.max(), 12) == 0);
+	}
 }
