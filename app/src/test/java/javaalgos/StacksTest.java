@@ -11,4 +11,11 @@ public class StacksTest {
 		int r = Stacks.evaluateReversePolishExpression(expression);
 		assertTrue(Integer.compare(r, 7) == 0);
 	}
+	
+	@Test public void testWellFormedString() {
+		String notWellFormed = "[()[]{()()";
+		String wellFormed = "[()[]|()()|]";
+		assertFalse(Stacks.isWellFormed(notWellFormed));
+		assertTrue(Stacks.isWellFormed(wellFormed));
+	}
 }
