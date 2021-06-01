@@ -9,7 +9,7 @@ public class StacksTest {
 	@Test public void testReversePolishNotation() {
 		String expression = "3,4,+,2,*,1,+";
 		int r = Stacks.evaluateReversePolishExpression(expression);
-		assertTrue(Integer.compare(r, 7) == 0);
+		assertTrue("r should be 15 not :"+r,Integer.compare(r, 15) == 0);
 	}
 	
 	@Test public void testWellFormedString() {

@@ -1,6 +1,9 @@
 package javaalgos;
 
 import java.util.Deque;
+import java.util.Set;
+import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Stacks {
 	
@@ -24,7 +27,36 @@ public class Stacks {
 	}
 	
  	public static int evaluateReversePolishExpression(String exp) {
- 		return -1;
+		Deque<Integer> e = new LinkedList<>();
+		String[] literals = exp.split(",");
+		Set<String> operators = new HashSet<>();
+		operators.add("+");
+		operators.add("/");
+		operators.add("*");
+		operators.add("-");
+		for(int i = 0; i < literals.length; i++) {
+			if(operators.contains(literals[i])) {
+				int y = e.pop();
+				int x = e.pop();
+				switch(literals[i]) {
+					case "+":
+					e.push(x+y);
+					break;
+					case "-":
+					e.push(x-y);
+					break;
+					case "*":
+					e.push(x*y);
+					break;
+					case "/":
+					e.push(x/y);
+					break;
+				}
+			}else {
+				e.push(Integer.parseInt(literals[i]));
+			}
+		}
+ 		return e.pop();
  	}
 	
 	public static boolean isWellFormed(String s) {
