@@ -2,8 +2,10 @@ package javaalgos;
 
 import java.util.Deque;
 import java.util.Set;
+import java.util.Map;
 import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.HashMap;
 
 public class Stacks {
 	
@@ -59,8 +61,30 @@ public class Stacks {
  		return e.pop();
  	}
 	
-	public static boolean isWellFormed(String s) {
-		return false;
+	public static boolean isWellFormed(String st) {
+		char[] cs = st.toCharArray();
+		Deque<Character> s = new LinkedList<>();
+		Map<Character, Character> mapping = new HashMap<>();
+		mapping.put('}', '{');
+		mapping.put(']', '[');
+		mapping.put(')', '(');
+		for(int i = 0; i < cs.length; i++) {
+			char c = cs[i];
+			if(mapping.containsValue(c)) {
+				s.push(c);
+			}else if(mapping.containsKey(c)) {
+				if(s.isEmpty()) {
+					return false;
+				}else {
+					if(Character.compare(s.peek(), mapping.get(c)) == 0) {
+						s.pop();
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+		return s.isEmpty();
 	}
 	
 	public static String normalizePathName(String p) {
