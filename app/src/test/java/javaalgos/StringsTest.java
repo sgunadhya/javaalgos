@@ -13,7 +13,8 @@ public class StringsTest {
 		tests.put("pwwkew", 3);
 		tests.put("", 0);
 		for(Map.Entry<String, Integer> e : tests.entrySet()) {
-			assertTrue(Strings.longestSubstringWithoutRepetition(e.getKey()) == e.getValue());
+			int r = Strings.longestSubstringWithoutRepetition(e.getKey());
+			assertTrue(e.getKey()+" has max length at :"+ e.getValue()+" but got: "+r, r == e.getValue());
 		}
 	}
 
