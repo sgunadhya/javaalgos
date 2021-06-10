@@ -12,5 +12,9 @@ public class Trees {
 		}
 		return g;
 	}
+	
+	public static int[] toArrayFromGraph(Map<Integer, List<Integer>> g) {
+		return new int[]{2};
+	}
 	 
 }
