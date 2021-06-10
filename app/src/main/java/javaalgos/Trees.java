@@ -48,7 +48,29 @@ public class Trees {
 	}
 	
 	public static Map<Character, String> huffmanEncoding(Map<Character, Integer> f) {
-		return new HashMap<>();
+		PriorityQueue<HuffmanNode> q = new PriorityQueue<>();
+		Map<Character, String> r = new HashMap<>();
+		for(Map.Entry<Character, Integer>  e : f.entrySet() ) {
+			q.add(new HuffmanNode(e.getKey(), e.getValue(), null, null));
+		}
+		while(q.size() > 1) {
+			HuffmanNode left = q.poll();
+			HuffmanNode right = q.poll();
+			q.add(new HuffmanNode('-', left.f + right.f , left, right));
+			
+		}
+		HuffmanNode root = q.poll();
+		gatherCode(r, root, "");
+ 		return r;
+	}
+	
+	private static void gatherCode(Map<Character, String> s, HuffmanNode n, String k) {
+		if(n.left != null && n.right != null && n.c == '-') {
+			gatherCode(s, n.left, k + "0");
+			gatherCode(s, n.right, k + "1");
+		}else {
+			s.put(n.c , k.toString());
+		}
 	}
 	 
 }
