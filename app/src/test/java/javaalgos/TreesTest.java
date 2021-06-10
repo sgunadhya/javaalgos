@@ -23,6 +23,8 @@ public class TreesTest {
 		g.put(1, Arrays.asList(2));
 		g.put(2, Arrays.asList(4));
 		g.put(3, Arrays.asList(5));
+		g.put(4, Collections.EMPTY_LIST);
+		g.put(5, Collections.EMPTY_LIST);
 		int[] pA = Trees.toArrayFromGraph(g);
 		assertTrue(pA[1] == 0);
 		assertTrue(pA[2] == 1);
