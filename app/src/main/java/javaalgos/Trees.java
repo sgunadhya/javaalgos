@@ -74,6 +74,17 @@ public class Trees {
 	}
 	
 	public static int commonAncestor(int[] pA, int x, int y) {
+		int n = pA.length;
+		int[] levels = new int[n];
+		levels[0] = 0;
+		for(int i = 1; i < n; i++) {
+			levels[i] = 1 + levels[pA[i]];
+		}
+		int d = 1;
+		while((1 << d) <= n) ++d;
+		int[][] anc = new int[d][n];
+		
+		
 		return -1;
 	}
 	 
