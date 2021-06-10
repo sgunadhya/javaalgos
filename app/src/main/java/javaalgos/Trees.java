@@ -72,5 +72,9 @@ public class Trees {
 			s.put(n.c , k.toString());
 		}
 	}
+	
+	public static int commonAncestor(int[] pA, int x, int y) {
+		return -1;
+	}
 	 
 }

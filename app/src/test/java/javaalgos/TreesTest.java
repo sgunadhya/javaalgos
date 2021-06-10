@@ -55,4 +55,11 @@ public class TreesTest {
 		}
 		
 	}
+	
+	@Test
+	public void testLeastCommonAncestor() {
+		int[] pA = new int[]{-1, 0, 1, 1, 0};
+		int a = Trees.commonAncestor(pA, 2, 4);
+		assertTrue(a == 0);
+	}
 }
