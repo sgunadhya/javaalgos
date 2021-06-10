@@ -83,9 +83,35 @@ public class Trees {
 		int d = 1;
 		while((1 << d) <= n) ++d;
 		int[][] anc = new int[d][n];
-		
-		
-		return -1;
+		for(int i = 1; i < n; i++) {
+			anc[0][i] = pA[i];
+		}
+		for(int j = 1; j < d; j++) {
+			for(int i = 0; i < n; i++) {
+				anc[j][i] = anc[j-1][anc[j-1][i]];
+			}
+		}
+		//query
+		if(levels[x] > levels[y]) {
+			int temp = x;
+			x = y;
+			y = temp;
+		}
+		for(int k = d - 1; k >=0; k--) {
+			if(levels[x] <= levels[y]- (1 << k)) {
+				y = anc[k][y];
+			}
+		}
+		if(x == y) {
+			return x;
+		}
+		for(int k = d - 1; k >= 0; k--) {
+			if(anc[k][x] != anc[k][y]) {
+				x = anc[k][x];
+				y = anc[k][y];
+			}
+		}
+		return anc[0][x];
 	}
 	 
 }
