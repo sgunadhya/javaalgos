@@ -29,5 +29,9 @@ public class Trees {
 		}		
 		return p;
 	}
+	
+	public static Map<Character, String> huffmanEncoding(Map<Character, Integer> f) {
+		return new HashMap<>();
+	}
 	 
 }

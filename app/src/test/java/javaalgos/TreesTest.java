@@ -32,4 +32,27 @@ public class TreesTest {
 		assertTrue(pA[4] == 2);
 		assertTrue(pA[5] == 3);
 	}
+	
+	@Test
+	public void testHuffmanEncoding() {
+		Map<Character, Integer> charFrequency = new HashMap<>();
+		charFrequency.put('a', 5);
+		charFrequency.put('b', 9);
+		charFrequency.put('c', 12);
+		charFrequency.put('d', 13);
+		charFrequency.put('e', 16);
+		charFrequency.put('f', 45);
+		Map<Character, String> r = new HashMap<>();
+		r.put('f', "0");
+		r.put('c', "100");
+		r.put('d', "101");
+		r.put('a', "1100");
+		r.put('b', "1101");
+		r.put('e', "111");
+		Map<Character, String> a = Trees.huffmanEncoding(charFrequency);
+		for(Map.Entry<Character, String> e: r.entrySet()) {
+			assertEquals(e.getValue(), a.get(e.getKey()));
+		}
+		
+	}
 }
