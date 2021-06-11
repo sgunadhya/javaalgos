@@ -117,6 +117,17 @@ public class BSTs {
 	}
 	
 	public static void toGreaterTree(BSTNode a) {
-		return;
+		toGreaterTreeHelper(a);
+	}
+	
+	private static void toGreaterTreeHelper(BSTNode a) {
+		if(a == null) {
+			return;
+		}
+		toGreaterTreeHelper(a.left);
+		toGreaterTreeHelper(a.right);
+		if(a.right != null) {
+			a.data = a.data + a.right.data;
+		}
 	}
 }
