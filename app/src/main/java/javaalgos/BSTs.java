@@ -115,4 +115,8 @@ public class BSTs {
 			findInRangeHelper(a.left, s, e, r);
 		}
 	}
+	
+	public static void toGreaterTree(BSTNode a) {
+		return;
+	}
 }

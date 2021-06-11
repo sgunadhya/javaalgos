@@ -75,8 +75,17 @@ public class BSTsTest {
 			assertTrue("r should contain "+x[i], r.contains(x[i]));
 		}
 	}
-	
-	@Test public void testAdditionalCreditsProblem() {
-		
+	/** LeetCode : 538
+		**/
+	@Test
+	public void testBSTToGreaterTree() {
+		BSTs.BSTNode a1 = new BSTs.BSTNode(0, null, new BSTs.BSTNode(1, null, null));
+		BSTs.toGreaterTree(a1);
+		assertTrue(a1.data == 1);
+		assertTrue(a1.left == null);
+		assertTrue(a1.right != null);
+		assertTrue(a1.right.data == 1);
 	}
+	
+
 } 
