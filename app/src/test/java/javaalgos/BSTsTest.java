@@ -123,9 +123,24 @@ public class BSTsTest {
 		for(int i = 0; i < val.length; i++) {
 			assertTrue(i+" should be "+r[i]+" : but it is "+val[i].data, r[i] == val[i].data);
 		}
-		
-		
 			
+	}
+	
+	//Leet Code 1214
+	@Test
+	public void testTwoSumBST() {
+		BSTs.BSTNode b0 = new BSTs.BSTNode(0);
+		BSTs.BSTNode b1 = new BSTs.BSTNode(1);
+		BSTs.BSTNode b3 = new BSTs.BSTNode(3);
+		b1.left = b0;
+		b1.right = b3;
+		
+		BSTs.BSTNode a2 = new BSTs.BSTNode(2);
+		BSTs.BSTNode a1 = new BSTs.BSTNode(1);
+		BSTs.BSTNode a3 = new BSTs.BSTNode(4);
+		a2.left = a1;
+		a2.right = a4;
+		assertTrue(BSTs.twoSumBSTs(b1, a2, 5));
 	}
 	
 
