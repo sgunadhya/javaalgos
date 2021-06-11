@@ -11,4 +11,35 @@ public class AppTest {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
+	
+	//Leet Code : 285
+	@Test
+	public void testFindInOrderSuccessor() {
+		App.TreeNode a1 = new App.TreeNode(1);
+		App.TreeNode a2 = new App.TreeNode(2);
+		App.TreeNode a3 = new App.TreeNode(3);
+		a2.left = a1;
+		a2.right = a3;
+		App.TreeNode r = App.inorderSuccessor(a2, a1);
+		assertTrue(r == a2);
+	}
+	
+	//Leet Code : 285
+	@Test
+	public void testFindInOrderSuccessorNullCase() {
+		App.TreeNode a1 = new App.TreeNode(1);
+		App.TreeNode a2 = new App.TreeNode(2);
+		App.TreeNode a3 = new App.TreeNode(3);
+		App.TreeNode a4 = new App.TreeNode(4);
+		App.TreeNode a5 = new App.TreeNode(5);
+		App.TreeNode a6 = new App.TreeNode(6);
+		a5.left = a3;
+		a4.right = a6;
+		a3.left = a2;
+		a3.right = a4;
+		a2.left = a1;
+		App.TreeNode r = App.inorderSuccessor(a5, a6);
+		assertTrue(r == null);
+	}
+	
 }
