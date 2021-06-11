@@ -26,6 +26,19 @@ public class AppTest {
 	
 	//Leet Code : 285
 	@Test
+	public void testFindInOrderSuccessorWrongAnswer() {
+		App.TreeNode a1 = new App.TreeNode(1);
+		App.TreeNode a2 = new App.TreeNode(2);
+		App.TreeNode a3 = new App.TreeNode(3);
+		a2.left = null;
+		a2.right = a3;
+		App.TreeNode r = App.inorderSuccessor(a2, a2);
+		assertTrue(r == a3);
+	}
+	
+	
+	//Leet Code : 285
+	@Test
 	public void testFindInOrderSuccessorNullCase() {
 		App.TreeNode a1 = new App.TreeNode(1);
 		App.TreeNode a2 = new App.TreeNode(2);
@@ -34,7 +47,7 @@ public class AppTest {
 		App.TreeNode a5 = new App.TreeNode(5);
 		App.TreeNode a6 = new App.TreeNode(6);
 		a5.left = a3;
-		a4.right = a6;
+		a5.right = a6;
 		a3.left = a2;
 		a3.right = a4;
 		a2.left = a1;
