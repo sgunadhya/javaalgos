@@ -117,17 +117,20 @@ public class BSTs {
 	}
 	
 	public static void toGreaterTree(BSTNode a) {
-		toGreaterTreeHelper(a);
+		toGreaterTreeHelper(a, new Sum());
 	}
 	
-	private static void toGreaterTreeHelper(BSTNode a) {
+	public static class Sum {
+		int v;
+	}
+	
+	private static void toGreaterTreeHelper(BSTNode a, Sum c) {
 		if(a == null) {
 			return;
 		}
-		toGreaterTreeHelper(a.left);
-		toGreaterTreeHelper(a.right);
-		if(a.right != null) {
-			a.data = a.data + a.right.data;
-		}
+		toGreaterTreeHelper(a.right, c);
+		c.v += a.data;
+		a.data = c.v;
+		toGreaterTreeHelper(a.left, c);
 	}
 }

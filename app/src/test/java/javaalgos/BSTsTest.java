@@ -85,6 +85,47 @@ public class BSTsTest {
 		assertTrue(a1.left == null);
 		assertTrue(a1.right != null);
 		assertTrue(a1.right.data == 1);
+
+		BSTs.BSTNode a2 = new BSTs.BSTNode(1, new BSTs.BSTNode(0, null, null), new BSTs.BSTNode(2, null, null));
+		BSTs.toGreaterTree(a2);
+		assertTrue("First Node", a2.data == 3);
+		assertTrue("Second Node", a2.left.data == 3);
+		assertTrue("Third Node", a2.right.data == 2);
+
+		BSTs.BSTNode a3 = new BSTs.BSTNode(3, new BSTs.BSTNode(2, new BSTs.BSTNode(1, null, null), null), new BSTs.BSTNode(4, null, null));
+		BSTs.toGreaterTree(a3);
+		assertTrue("First Node", a3.data == 7);
+		assertTrue("Second Node", a3.right.data == 4);
+		assertTrue("Third Node", a3.left.data == 9);
+		assertTrue("Third Node", a3.left.left.data == 10);
+		
+		// [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+		BSTs.BSTNode b0 = new BSTs.BSTNode(0);
+		BSTs.BSTNode b1 = new BSTs.BSTNode(1);
+		BSTs.BSTNode b2 = new BSTs.BSTNode(2);
+		BSTs.BSTNode b3 = new BSTs.BSTNode(3);
+		BSTs.BSTNode b4 = new BSTs.BSTNode(4);
+		BSTs.BSTNode b5 = new BSTs.BSTNode(5);
+		BSTs.BSTNode b6 = new BSTs.BSTNode(6);
+		BSTs.BSTNode b7 = new BSTs.BSTNode(7);
+		BSTs.BSTNode b8 = new BSTs.BSTNode(8);
+		b2.right = b3;
+		b1.right = b2;
+		b1.left = b0;
+		b4.left = b1;
+		b4.right = b6;
+		b6.left = b5;
+		b6.right = b7;
+		b7.right = b8;
+		BSTs.toGreaterTree(b4);
+		BSTs.BSTNode[] val = new BSTs.BSTNode[]{b0, b1, b2, b3, b4, b5, b6, b7, b8};
+		int[] r = new int[]{36, 36, 35, 33, 30,26, 21, 15, 8};
+		for(int i = 0; i < val.length; i++) {
+			assertTrue(i+" should be "+r[i]+" : but it is "+val[i].data, r[i] == val[i].data);
+		}
+		
+		
+			
 	}
 	
 
