@@ -134,13 +134,22 @@ public class BSTsTest {
 		BSTs.BSTNode b3 = new BSTs.BSTNode(3);
 		b1.left = b0;
 		b1.right = b3;
-		
+
 		BSTs.BSTNode a2 = new BSTs.BSTNode(2);
 		BSTs.BSTNode a1 = new BSTs.BSTNode(1);
-		BSTs.BSTNode a3 = new BSTs.BSTNode(4);
+		BSTs.BSTNode a4 = new BSTs.BSTNode(4);
 		a2.left = a1;
 		a2.right = a4;
 		assertTrue(BSTs.twoSumBSTs(b1, a2, 5));
+		
+		BSTs.BSTNode a10 = new BSTs.BSTNode(-300988154, null, 
+			new BSTs.BSTNode(740140743, 
+				new BSTs.BSTNode(697166207, null, null), 
+					new BSTs.BSTNode(818410759, null,
+						new BSTs.BSTNode(936731239, null, null))));
+		BSTs.BSTNode b10 = new BSTs.BSTNode(-177861296, new BSTs.BSTNode(-534957072, null, null), new BSTs.BSTNode(127474120, null, null));
+		assertTrue(BSTs.twoSumBSTs(a10, b10, -478849450));
+		
 	}
 	
 

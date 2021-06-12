@@ -133,4 +133,41 @@ public class BSTs {
 		a.data = c.v;
 		toGreaterTreeHelper(a.left, c);
 	}
+	
+    public static boolean twoSumBSTs(BSTNode root1, BSTNode root2, int target) {
+        //search for all the nodes with values less than target in root1
+		// for each such value search for the (target - node.data in root2)
+		return inOrderTraversal(root1, root2, target);
+    }
+	
+	private static boolean inOrderTraversal(BSTNode x, BSTNode y, int target) {
+		boolean inLeft = false;
+		boolean inRight = false;
+		boolean inCurrent = false;
+		if(x.left != null ) {
+			inLeft = inOrderTraversal(x.left,y, target);
+		}
+		
+			System.out.println("Finding value for "+x.data);
+			System.out.println("Finding what  "+(target - x.data));
+			inCurrent = findInBST(y, target - x.data);
+		
+		if(x.right != null) {
+			inRight = inOrderTraversal(x.right, y, target);
+		}
+		return inLeft || inCurrent || inRight;
+	}
+	
+	private static boolean findInBST(BSTNode x, int v) {
+		if(x == null) {
+			return false;
+		}
+		if(x.data == v) {
+			return true;
+		}else if(v > x.data) {
+			return findInBST(x.right, v);
+		}else {
+			return findInBST(x.left, v);
+		}
+	}
 }

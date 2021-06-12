@@ -17,6 +17,13 @@ public class StringsTest {
 			assertTrue(e.getKey()+" has max length at :"+ e.getValue()+" but got: "+r, r == e.getValue());
 		}
 	}
+	//Leet code 345
+	@Test
+	public void testReverseVowel() {
+		assertEquals("leotcede", Strings.reverseVowels("leetcode"));
+		assertEquals("hello", Strings.reverseVowels("holle"));
+		assertEquals("ia", Strings.reverseVowels("ai"));
+	}
 
 	
 }
