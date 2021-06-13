@@ -37,4 +37,19 @@ public class App {
 		}
 		return a;
 	}	
+	
+    public static void moveZeroes(int[] nums) {
+        int p = 0;
+        int i = 0;
+        while(p < nums.length) {
+            if(nums[p] == 0)  {
+                i = p;
+                while(i < nums.length - 1 && nums[i] == 0) i++;
+                nums[p] = nums[i];
+                nums[i] = 0;
+            }
+            p++;
+        }
+        
+    }
 }

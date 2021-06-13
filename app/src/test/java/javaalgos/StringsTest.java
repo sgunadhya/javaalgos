@@ -24,6 +24,33 @@ public class StringsTest {
 		assertEquals("hello", Strings.reverseVowels("holle"));
 		assertEquals("ia", Strings.reverseVowels("ai"));
 	}
+	
+	//Leet code 541
+	@Test
+	public void testReverseStr()  {
+		assertEquals("bacdfeg", Strings.reverseStr("abcdefg", 2));
+		assertEquals("bacd", Strings.reverseStr("abcd", 2));
+	}
+	
+	//Leet code 557
+	@Test
+	public void testReverseWords()  {
+		assertEquals("s'teL ekat edoCteeL tsetnoc", Strings.reverseWords("Let's take LeetCode contest"));
+		assertEquals("doG gniD", Strings.reverseWords("God Ding"));
+	}
+	
+	@Test
+	public void testPalindromeWithAlphanumeric() {
+		// assertTrue(Strings.isPalindrome("A man, a plan, a canal: Panama"));
+		// assertFalse(Strings.isPalindrome("race a car"));
+		assertTrue(Strings.isPalindrome(".,"));
+	}
+	
+	@Test
+	public void testAddBinary() {
+		assertEquals("100", Strings.addBinary("11", "1"));
+	}
+		
 
 	
 }

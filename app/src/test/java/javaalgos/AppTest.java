@@ -55,4 +55,14 @@ public class AppTest {
 		assertTrue(r == null);
 	}
 	
+	@Test
+	public void testMoveZeros() {
+		int[] a = new int[]{0,1,0,3,12};
+		App.moveZeroes(a);
+		int[] r = new int[]{1,3,12,0,0};
+		for(int i = 0; i < r.length; i++) {
+			assertTrue(a[i] == r[i]);
+		}
+	}
+	
 }

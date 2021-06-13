@@ -25,7 +25,7 @@ public class BSTs {
 	private static boolean areKeysInRange(BSTNode a, Integer lower, Integer upper) {
 		if(a == null) {
 			return true;
-		}else if(Integer.compare(a.data, lower) < 0 || Integer.compare(a.data, upper) > 0) {
+		}else if(Integer.compare(a.data, lower) <= 0 || Integer.compare(a.data, upper) >= 0) {
 			return false;
 		}else {
 			return areKeysInRange(a.right, a.data, upper)
@@ -170,4 +170,24 @@ public class BSTs {
 			return findInBST(x.left, v);
 		}
 	}
+	
+	public static int rangeSumBST(BSTNode root, int low, int high) {
+	        Sum s = new Sum();
+	        rangeSumBSTHelper(root, low, high, s);
+	        return s.v;
+	    }
+    
+	    private static void rangeSumBSTHelper(BSTNode root, int low, int high, Sum s) {
+	        if(root == null) {
+	            return;
+	        }
+	        rangeSumBSTHelper(root.left, low, high, s);
+	        if(root.data >= low && root.data <= high) {
+	            s.v  += root.data;
+	        }
+	        if(root.data > high) {
+	            return;
+	        }
+	        rangeSumBSTHelper(root.right, low, high, s);
+	    }
 }

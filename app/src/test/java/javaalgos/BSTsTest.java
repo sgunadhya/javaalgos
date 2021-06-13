@@ -29,6 +29,15 @@ public class BSTsTest {
 		assertTrue(BSTs.isValidBST(a));
 	}
 	
+	
+	@Test public void testIsValidBSTOverflow() {
+		assertTrue(BSTs.isValidBST(new BSTs.BSTNode(2147483647, null, null)));
+	}
+	
+	@Test public void testIsValidBSTOverflowWithEqual() {
+		assertFalse(BSTs.isValidBST(new BSTs.BSTNode(2, new BSTs.BSTNode(2, null, null), new BSTs.BSTNode(2, null, null))));
+	}
+	
 	@Test public void testFindFirstKeyGreaterThanAValue() {
 		assertTrue(BSTs.findFirstKeyGreaterThan(a, 50) == 53);
 	}
