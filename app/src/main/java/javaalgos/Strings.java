@@ -1,6 +1,6 @@
 package javaalgos;
 
-
+import java.util.*;
 public class Strings {
 	
 	public static int longestSubstringWithoutRepetition(String st) {
@@ -68,7 +68,6 @@ public class Strings {
         for(int i = 0; i < st.length(); i+=2*k) {
             int s = i;
             int e = Math.min(s + k - 1, t.length - 1);
-			System.out.println("Reversing from :"+s+" to :"+e);
             while(s < e) {
                 char temp = t[s];
                 t[s] = t[e];
@@ -165,6 +164,112 @@ public class Strings {
 			   r.insert(0, '1');
 		   }
            return r.toString();
+	   }
+	   
+	   public static int myAtoi(String st) {
+		   char[] t = st.toCharArray();
+		   int wC = 0;
+		   boolean isPositive = true;
+		   while(wC < t.length && Character.isWhitespace(t[wC])) wC++;
+		   if(wC == t.length ) {
+			   return 0;
+		   }
+		   if(t[wC] == '-') {
+			   isPositive = false;
+			   wC++;
+		   }else if (t[wC] == '+') {
+			   wC++;
+		   }
+		   if(wC == t.length) {
+			   return 0;
+		   }
+		   if(Character.isDigit(t[wC])) {
+			   int d = wC;
+			   while(d < t.length  && Character.isDigit(t[d])) d++;
+			   d--;
+			   int r = 0;
+			   int n = 0;
+			   int m = 0;
+			   while(wC <= d) {
+				   n = t[wC] - '0';
+				   try {
+					   m = Math.multiplyExact(r, 10);
+					   r = Math.addExact(m, n);
+				   }catch(ArithmeticException e) {
+					   return isPositive? Integer.MAX_VALUE : Integer.MIN_VALUE;
+				   }
+				   wC++;
+			   }
+			   return isPositive? r : r*-1;
+		   }else {
+			   return 0;
+		   }
+	   }
+	   
+	   
+	   public static int romanToInt(String s) {
+		   int i = 0;
+		   Map<Character, Integer> m = new HashMap<>();
+		   m.put('I', 1);
+		   m.put('V', 5);
+		   m.put('X', 10);
+		   m.put('L', 50);
+		   m.put('C', 100);
+		   m.put('D', 500);
+		   m.put('M', 1000);
+		   int r = 0;
+		   while(i < s.length()) {
+			   char c = s.charAt(i);
+			   if(c == 'I') {
+				   if(i + 1 < s.length()) {
+					   if(s.charAt(i+1) == 'V') {
+						   r = r + 4;
+						   i++;
+					   }else if(s.charAt(i+1) == 'X'){
+						   r = r + 9;
+						   i++;
+					   }else {
+						   r = r + m.get(c);
+					   }
+				   }else {
+				   	r = r + m.get(c);
+				   }
+			   }else if (c == 'X') {
+				   if(i + 1 < s.length()) {
+					   if(s.charAt(i+1) == 'L') {
+						   r = r + 40;
+						   i++;
+					   }else if(s.charAt(i+1) == 'C'){
+						   r = r + 90;
+						   i++;
+					   }else {
+						   r = r + m.get(c);
+					   }
+				   }else {
+				   	r = r + m.get(c);
+				   }
+			   }else if(c == 'C') {
+				   if(i + 1 < s.length()) {
+					   if(s.charAt(i+1) == 'D') {
+						   r = r + 400;
+						   i++;
+					   }else if(s.charAt(i+1) == 'M'){
+						   r = r + 900;
+						   i++;
+					   }else {
+						   r = r + m.get(c);
+					   }
+				   }else {
+				   	r = r + m.get(c);
+				   }
+			   	
+			   }else {
+			   	r = r + m.get(c);
+			   }
+			   i++;
+		   }
+			   
+		   return r;	
 	   }
 
 }

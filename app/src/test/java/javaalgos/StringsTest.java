@@ -50,6 +50,25 @@ public class StringsTest {
 	public void testAddBinary() {
 		assertEquals("100", Strings.addBinary("11", "1"));
 	}
+	
+	@Test
+	public void testMyAtoi() {
+		assertTrue("First ", -42 == Strings.myAtoi("   -42"));
+		assertTrue(4193 == Strings.myAtoi("4193 with words"));
+		assertTrue(0 == Strings.myAtoi("words and 987"));
+		assertTrue(Integer.MIN_VALUE == Strings.myAtoi("-91283472332"));
+		assertTrue(0 == Strings.myAtoi("+"));
+		assertTrue(-4 == Strings.myAtoi("   -04f"));
+	}
+	
+	@Test
+	public void testRomanToInt() {
+		String[] args = new String[] {"III", "IV", "IX", "LVIII", "MCMXCIV"};
+		int[] x = new int[]{3,4,9,58,1994};
+		for(int i = 0; i < x.length; i++) {
+			assertTrue(x[i] == Strings.romanToInt(args[i]));
+		}
+	}
 		
 
 	
