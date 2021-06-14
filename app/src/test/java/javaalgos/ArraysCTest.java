@@ -1,7 +1,7 @@
 package javaalgos;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class ArraysCTest {
 	
@@ -77,4 +77,19 @@ public class ArraysCTest {
 		int profit = ArraysC.maximumProfit(prices);
 		assertTrue("Maximum profit should be 30 instead it is : "+profit, profit == 30);
 	}
+	
+	@Test
+	public void testThreeSum() {
+		List<List<Integer>> t = ArraysC.threeSum(new int[] {-1,0,1,2,-1,-4});
+		System.out.println(t);
+		int r = t.size();
+		System.out.println(r);
+		assertTrue("Size should be 2 instead it is :"+r, 2 == r);
+	}
+	
+	@Test
+	public void testPOairSum() {
+		assertTrue(2 == ArraysC.numberOfWays(new int[]{1, 2, 3, 4, 3}, 6));
+		assertTrue(4 == ArraysC.numberOfWays(new int[]{1, 5, 3, 3, 3}, 6));  
+	} 
 }

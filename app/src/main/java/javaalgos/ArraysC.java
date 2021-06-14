@@ -2,6 +2,11 @@ package javaalgos;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+
 
 public class ArraysC {
 	
@@ -175,5 +180,54 @@ public class ArraysC {
 		}
 		return profit;
 	}
+	
+    public static List<List<Integer>> threeSum(int[] nums) {
+		Arrays.sort(nums);
+		Set<List<Integer>> r = new HashSet<>();
+		int i = 0;
+		while(i < nums.length - 2) {
+			int s = i + 1;
+			int e = nums.length - 1;
+			while(s < e) {
+				if(nums[i] + nums[s] + nums[e] == 0) {
+					r.add(Arrays.asList(nums[i], nums[s], nums[e]));
+					s = s + 1;
+					e = e - 1;
+				}else if(nums[i] + nums[s] + nums[e] < 0 ) {
+					s = s + 1;
+				}else {
+					e = e - 1;
+				}
+			}
+			i++;
+		}
+        return new ArrayList<>(r);
+    }
+	
+public static int numberOfWays(int[] arr, int k) {
+    // Write your code here
+    Map<Integer, Integer> counter = new HashMap<>();
+    int s = 0;
+    for(int i = 0; i < arr.length; i++) {
+      int count = counter.getOrDefault(arr[i], 0);
+      counter.put(arr[i], count + 1);
+    }
+    Set<Integer> r = counter.keySet();
+    Set<Integer> seen = new HashSet<>();
+    for(Map.Entry<Integer, Integer> c : counter.entrySet()) {
+      if(counter.containsKey(k - c.getKey()) && !seen.contains(k - c.getKey())) {
+		if(c.getKey() == k - c.getKey()) {
+			s += (c.getValue()*(c.getValue() - 1))/2;
+		}else {
+			s += counter.get(k - c.getKey())* c.getValue();
+		}
+        
+        seen.add(c.getKey());
+      }
+    }
+
+    return s;
+
+  }
   
 }
