@@ -230,4 +230,8 @@ public static int numberOfWays(int[] arr, int k) {
 
   }
   
+  public static void nextPermutation(int[] a) {
+	  return;
+  }
+  
 }

@@ -92,4 +92,21 @@ public class ArraysCTest {
 		assertTrue(2 == ArraysC.numberOfWays(new int[]{1, 2, 3, 4, 3}, 6));
 		assertTrue(4 == ArraysC.numberOfWays(new int[]{1, 5, 3, 3, 3}, 6));  
 	} 
+	
+	
+	@Test
+	public void testNextPermutation() {
+		int[] a = new int[]{1,2,3};
+		int[] b = new int[]{3,2,1};
+		int[] c = new int[]{1,1,5};
+		ArraysC.nextPermutation(a);
+		ArraysC.nextPermutation(b);
+		ArraysC.nextPermutation(c);
+		assertArrayEquals(new int[]{1,3,2}, a);
+		assertArrayEquals(new int[]{1,2,3}, b);
+		assertArrayEquals(new int[]{1,5,1}, c);
+		
+		
+		
+	}
 }
