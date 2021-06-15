@@ -231,7 +231,40 @@ public static int numberOfWays(int[] arr, int k) {
   }
   
   public static void nextPermutation(int[] a) {
-	  return;
+	  int firstDescending = -1;
+	  int i = a.length - 2;
+	  while(i >= 0) {
+		  if(a[i] < a[i+1]){
+			  firstDescending = i;
+			  break;
+		  }
+		  i--;
+	  }
+	  System.out.println("First Descending :"+firstDescending);
+	  if(firstDescending < 0) {
+		  Arrays.sort(a);
+		  return;
+	  }
+	  int next = a.length - 1;
+	  while(next > firstDescending) {
+		  if(a[next] > a[firstDescending]){
+			  break;
+		  }
+		  --next;
+	  }
+	  System.out.println("Next :"+next);
+	  int temp = a[firstDescending];
+	  a[firstDescending] = a[next];
+	  a[next] = temp;
+	  int s = firstDescending + 1;
+	  int e = a.length - 1;
+	  while(s < e) {
+		  temp = a[s];
+		  a[s] = a[e];
+		  a[e] = temp;	  	
+		  s++;
+		  --e;
+	  }
   }
   
 }

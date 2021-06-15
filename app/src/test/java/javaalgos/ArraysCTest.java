@@ -102,11 +102,8 @@ public class ArraysCTest {
 		ArraysC.nextPermutation(a);
 		ArraysC.nextPermutation(b);
 		ArraysC.nextPermutation(c);
-		assertArrayEquals(new int[]{1,3,2}, a);
-		assertArrayEquals(new int[]{1,2,3}, b);
-		assertArrayEquals(new int[]{1,5,1}, c);
-		
-		
-		
+		assertArrayEquals("Case 1",new int[]{1,3,2}, a);
+		assertArrayEquals("Case 2",new int[]{1,2,3}, b);
+		assertArrayEquals("Case 3",new int[]{1,5,1}, c);
 	}
 }
