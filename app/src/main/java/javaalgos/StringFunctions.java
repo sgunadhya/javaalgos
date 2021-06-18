@@ -1,12 +1,6 @@
 package javaalgos;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 import java.util.Arrays;
 
 
@@ -59,7 +53,7 @@ public class StringFunctions {
 
         for (Set<String> ls : d.values()) {
             if (ls.size() > 1) {
-                r.add(new ArrayList(ls));
+                r.add(new ArrayList<>(ls));
             }
         }
 
@@ -236,5 +230,27 @@ public class StringFunctions {
             }
         }
         return -1;
+    }
+
+    public static Integer[] suffixArray(CharSequence s) {
+        int n = s.length();
+        Integer[] sa = new Integer[n];
+        int[] rank = new int[n];
+        for(int i = 0; i < n; i++) {
+            sa[i] = i;
+            rank[i] = s.charAt(i);
+        }
+        for(int len = 1; len < n; len++) {
+            long[] rank2 = new long[n];
+            for (int i = 0; i < n; i++){
+                rank2[i] = ((long) rank[i] << 32) + (i + len < n ? rank[i + len] + 1 : 0);
+            }
+            Arrays.sort(sa, Comparator.comparingLong(a -> rank2[a]));
+
+            for (int i = 0; i < n; i++){
+                rank[sa[i]] = i > 0 && rank2[sa[i - 1]] == rank2[sa[i]] ? rank[sa[i - 1]] : i;
+            }
+        }
+        return sa;
     }
 }
