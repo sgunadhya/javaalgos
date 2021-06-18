@@ -90,6 +90,16 @@ public class BinTreesTest {
                 new BinTrees.TreeNode(7, null, null));
         assertTrue(BinTrees.targetSum(t, 4));
     }
+	
+
+	//Leet code 545
+    @Test
+    public void testBinaryTreeBoundary() {
+        BinTrees.TreeNode t = new BinTrees.TreeNode(1, null, new BinTrees.TreeNode(2,
+                new BinTrees.TreeNode(3, null, null),
+                new BinTrees.TreeNode(4, null, null)));
+        assertTrue(4 == BinTrees.boundary(t).size());
+    }
 
     // @Test
 // 	public void testInOrderIterative() {

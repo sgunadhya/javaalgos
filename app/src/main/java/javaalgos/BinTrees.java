@@ -184,4 +184,9 @@ public class BinTrees {
         int h = Math.max(left.h, right.h);
         return new BResult(h, isB && left.r && right.r);
     }
+	
+	public static List<Integer> boundary(TreeNode t) {
+		List<Integer> r = new ArrayList<>();
+		return r;
+	}
 }
