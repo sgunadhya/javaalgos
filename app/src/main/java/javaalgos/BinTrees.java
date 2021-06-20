@@ -187,6 +187,29 @@ public class BinTrees {
 	
 	public static List<Integer> boundary(TreeNode t) {
 		List<Integer> r = new ArrayList<>();
+		
+		if(t == null) {
+			return r;
+		}
+		Queue<TreeNode> q = new ArrayDeque<>();
+		q.offer(t);
+		while(!q.isEmpty()) {
+			int s = q.size();
+			for(int i = 0; i < s; i++) {
+				TreeNode v = q.poll();
+				if(v.left == null && v.right == null) {
+					r.add(v.v);
+				}else if(i == 0 || i == s - 1) {
+					r.add(v.v);
+				}
+				if(v.left != null) {
+					q.offer(v.left);
+				}
+				if(v.right != null) {
+					q.offer(v.right);
+				}
+			}
+		}
 		return r;
 	}
 }
