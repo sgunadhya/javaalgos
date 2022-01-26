@@ -29,6 +29,9 @@ public class UnionFindNode<T> implements PartitionElement<T> {
 
     @Override
     public PartitionElement<T> union(PartitionElement<T> x) {
+        if(!(x instanceof UnionFindNode)){
+            throw new IllegalArgumentException();
+        }
         return null;
     }
 
