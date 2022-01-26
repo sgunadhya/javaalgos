@@ -32,7 +32,21 @@ public class UnionFindNode<T> implements PartitionElement<T> {
         if(!(x instanceof UnionFindNode)){
             throw new IllegalArgumentException();
         }
-        return null;
+        UnionFindNode<T> representativeOther = (UnionFindNode<T>) x.findRepresentative();
+        UnionFindNode<T> representativeThis = (UnionFindNode<T>) this.findRepresentative();
+        if(representativeOther == representativeThis) {
+            return representativeOther;
+        }
+        if(representativeOther.rank > representativeThis.rank) {
+            representativeThis.parentNode = representativeOther;
+            return representativeOther;
+        }else{
+            representativeOther.parentNode = representativeThis;
+            if(representativeOther.rank == representativeThis.rank) {
+                representativeThis.rank++;
+            }
+            return representativeThis;
+        }
     }
 
     @Override
