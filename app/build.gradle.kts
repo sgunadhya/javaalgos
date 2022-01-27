@@ -14,6 +14,7 @@ plugins {
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
+    mavenLocal()
 }
 
 dependencies {
@@ -22,6 +23,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:29.0-jre")
+    implementation("goldman:ADS:1.0-SNAPSHOT")
 }
 
 application {
