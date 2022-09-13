@@ -1,66 +1,71 @@
 package javaalgos.adt;
 
-public class SegmentTree {
-    private int[] tree;
-    private int[] array;
+public class SegmentTree<T extends Comparable>{
+    private T[] tree;
+    private T[] array;
+    private int capacity;
+    private int size;
 
-    public SegmentTree(int[] array) {
+    public SegmentTree(T[] array) {
         this.array = array;
-        tree = new int[4 * array.length];
-        build(1, 0, array.length - 1);
+        this.capacity = array.length;
+        this.size = 0;
+        this.tree = (T[]) new Comparable[capacity * 2];
+        buildTree();
     }
 
-    private void build(int node, int left, int right) {
-        if (left == right) {
-            tree[node] = array[left];
-        } else {
-            int middle = (left + right) / 2;
-            build(2 * node, left, middle);
-            build(2 * node + 1, middle + 1, right);
-            tree[node] = Math.min(tree[2 * node], tree[2 * node + 1]);
+    private void buildTree() {
+        System.arraycopy(array, 0, tree, capacity + 0, array.length);
+        for (int i = capacity - 1; i > 0; i--) {
+            tree[i] = max(tree[i * 2], tree[i * 2 + 1]);
         }
     }
 
-    public int query(int left, int right) {
-        return query(1, 0, array.length - 1, left, right);
+    private T max(T a, T b) {
+        return a.compareTo(b) >= 0 ? a : b;
     }
 
-    private int query(int node, int left, int right, int i, int j) {
-        if (i > right || j < left) {
-            return Integer.MAX_VALUE;
-        }
-        if (left >= i && right <= j) {
-            return tree[node];
-        }
-        int middle = (left + right) / 2;
-        int leftMin = query(2 * node, left, middle, i, j);
-        int rightMin = query(2 * node + 1, middle + 1, right, i, j);
-        return Math.min(leftMin, rightMin);
-    }
-
-    public void update(int index, int value) {
-        update(1, 0, array.length - 1, index, value);
-    }
-
-    private void update(int node, int left, int right, int index, int value) {
-        if (left == right) {
-            tree[node] = value;
-        } else {
-            int middle = (left + right) / 2;
-            if (index <= middle) {
-                update(2 * node, left, middle, index, value);
-            } else {
-                update(2 * node + 1, middle + 1, right, index, value);
+    public T rangeMax(int l, int r) {
+        l += capacity;
+        r += capacity;
+        T max = null;
+        while (l <= r) {
+            if (l % 2 == 1) {
+                max = max == null ? tree[l] : max(max, tree[l]);
+                l++;
             }
-            tree[node] = Math.min(tree[2 * node], tree[2 * node + 1]);
+            if (r % 2 == 0) {
+                max = max == null ? tree[r] : max(max, tree[r]);
+                r--;
+            }
+            l /= 2;
+            r /= 2;
         }
+        return max;
+    }
+
+    public void update(int i, T value) {
+        i += capacity;
+        tree[i] = value;
+        while (i > 1) {
+            i /= 2;
+            tree[i] = max(tree[i * 2], tree[i * 2 + 1]);
+        }
+    }
+
+    public void printTree() {
+        for (T t : tree) {
+            System.out.print(t + " ");
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        SegmentTree segmentTree = new SegmentTree(array);
-        System.out.println(segmentTree.query(100, 1000));
-        segmentTree.update(0, 10);
-        System.out.println(segmentTree.query(0, 9));
+        Integer[] array = {1, 5, 3, 2, 4, 7, 6, 8, 9};
+        SegmentTree<Integer> segmentTree = new SegmentTree<>(array);
+        segmentTree.printTree();
+        segmentTree.update(3, 10);
+        segmentTree.printTree();
+        System.out.println(segmentTree.rangeMax(1, 5));
     }
 }
