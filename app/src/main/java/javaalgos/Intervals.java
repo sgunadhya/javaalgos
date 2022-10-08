@@ -180,5 +180,38 @@ public class Intervals {
         return l;
     }
 
+    public static int[][] mergeIntervals(int[][] intervals) {
+       int i = 0;
+       Interval[] input = new Interval[intervals.length];
+       while(i != intervals.length) {
+           input[i] = new Interval(intervals[i][0], intervals[i][1]);
+           i++;
+       }
+
+       Arrays.sort(input, Comparator.comparingInt(a -> a.s));
+       List<Interval> resultList = new ArrayList<>();
+       resultList.add(input[0]);
+       i = 1;
+       Interval current = input[0];
+       while(i != input.length) {
+           if(input[i].s <= current.e) {
+               current.e = Math.max(current.e, input[i].e);
+           } else {
+               current = new Interval(input[i].s, input[i].e);
+               resultList.add(current);
+           }
+           i++;
+       }
+
+       int[][] result = new int[resultList.size()][];
+       i = 0;
+       while(i != resultList.size()) {
+           result[i] = new int[]{resultList.get(i).s, resultList.get(i).e};
+           i++;
+       }
+       return result;
+    }
+
+
 
 }
