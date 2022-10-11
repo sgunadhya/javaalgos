@@ -193,4 +193,14 @@ public class BSTs {
         }
         rangeSumBSTHelper(root.right, low, high, s);
     }
+
+    public static BSTNode lowestCommonAncestor(BSTNode root, BSTNode p, BSTNode q){
+        if(root == null)
+            return null;
+        if(root.data > p.data && root.data > q.data)
+            return lowestCommonAncestor(root.left, p, q);
+        if(root.data < p.data && root.data < q.data)
+            return lowestCommonAncestor(root.right, p, q);
+        return root;
+    }
 }

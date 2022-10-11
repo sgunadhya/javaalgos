@@ -273,4 +273,68 @@ public class Strings {
         return r;
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(longestRepeatingSubstringWithSuffixArray("aabcaabdaab"));
+    }
+
+    public static String longestRepeatingSubstring(String s) {
+        int n = s.length();
+        String[][] dp = new String[n][n];
+        int max = 0;
+        String r = "";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j) {
+                    dp[i][j] = "";
+                } else {
+                    if (s.charAt(i) == s.charAt(j)) {
+                        if (i - 1 >= 0 && j - 1 >= 0) {
+                            dp[i][j] = dp[i - 1][j - 1] + s.charAt(i);
+                        } else {
+                            dp[i][j] = "" + s.charAt(i);
+                        }
+                        if (dp[i][j].length() > max) {
+                            max = dp[i][j].length();
+                            r = dp[i][j];
+                        }
+                    } else {
+                        dp[i][j] = "";
+                    }
+                }
+            }
+        }
+        return r;
+    }
+
+    public static String longestRepeatingSubstringWithSuffixArray(String s) {
+        int n = s.length();
+        String[] suffixes = new String[n];
+        for (int i = 0; i < n; i++) {
+            suffixes[i] = s.substring(i);
+        }
+        Arrays.sort(suffixes);
+        String r = "";
+        int max = 0;
+        for (int i = 0; i < n - 1; i++) {
+            int l = lcp(suffixes[i], suffixes[i + 1]);
+            if (l > max) {
+                max = l;
+                r = suffixes[i].substring(0, l);
+            }
+        }
+        return r;
+    }
+
+    private static int lcp(String suffix, String suffix1) {
+        int n = Math.min(suffix.length(), suffix1.length());
+        int i = 0;
+        while (i < n && suffix.charAt(i) == suffix1.charAt(i)) {
+            i++;
+        }
+        return i;
+    }
+
+
+
 }

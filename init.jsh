@@ -53,3 +53,5 @@ class Interval {
         return String.format("(%d, %d)", this.start, this.end);
     }   
 }
+
+BinaryTreeNode a = new BinaryTreeNode(1, new BinaryTreeNode(2, new BinaryTreeNode(4), new BinaryTreeNode(5)), new BinaryTreeNode(3, new BinaryTreeNode(6), new BinaryTreeNode(7)));

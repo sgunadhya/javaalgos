@@ -1,5 +1,7 @@
 package javaalgos;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class BinTrees {
@@ -12,6 +14,10 @@ public class BinTrees {
             this.v = v;
             this.left = l;
             this.right = r;
+        }
+
+        public TreeNode(int v) {
+            this.v = v;
         }
     }
 
@@ -186,30 +192,90 @@ public class BinTrees {
     }
 	
 	public static List<Integer> boundary(TreeNode t) {
-		List<Integer> r = new ArrayList<>();
-		
-		if(t == null) {
-			return r;
-		}
-		Queue<TreeNode> q = new ArrayDeque<>();
-		q.offer(t);
-		while(!q.isEmpty()) {
-			int s = q.size();
-			for(int i = 0; i < s; i++) {
-				TreeNode v = q.poll();
-				if(v.left == null && v.right == null) {
-					r.add(v.v);
-				}else if(i == 0 || i == s - 1) {
-					r.add(v.v);
-				}
-				if(v.left != null) {
-					q.offer(v.left);
-				}
-				if(v.right != null) {
-					q.offer(v.right);
-				}
-			}
-		}
-		return r;
-	}
+        List<Integer> r = new ArrayList<>();
+
+        if (t == null) {
+            return r;
+        }
+        Queue<TreeNode> q = new ArrayDeque<>();
+        q.offer(t);
+        while (!q.isEmpty()) {
+            int s = q.size();
+            for (int i = 0; i < s; i++) {
+                TreeNode v = q.poll();
+                if (v.left == null && v.right == null) {
+                    r.add(v.v);
+                } else if (i == 0 || i == s - 1) {
+                    r.add(v.v);
+                }
+                if (v.left != null) {
+                    q.offer(v.left);
+                }
+                if (v.right != null) {
+                    q.offer(v.right);
+                }
+            }
+        }
+        return r;
+    }
+
+
+    public static TreeNode makeBinaryTree(int[] inorder, int inOrderStart, int inOrderEnd, int[] preorder,
+                                          int preorderStart, int preorderEnd) {
+        if (inOrderStart > inOrderEnd) {
+            return null;
+        }
+        int root = preorder[preorderStart];
+        int rootIndex = -1;
+        int j = 0;
+        while(j < inorder.length) {
+            if (inorder[j] == root) {
+                rootIndex = j;
+                break;
+            }
+            j++;
+        }
+        TreeNode t = new TreeNode(root);
+        t.left = makeBinaryTree(inorder, inOrderStart, rootIndex - 1, preorder, preorderStart + 1, preorderStart + rootIndex - inOrderStart);
+        t.right = makeBinaryTree(inorder, rootIndex + 1, inOrderEnd, preorder, preorderStart + rootIndex - inOrderStart + 1, preorderEnd);
+        return t;
+    }
+
+    public TreeNode constuctBinaryTree(int[] preorder, int[] inorder) {
+        return makeBinaryTree(inorder, 0, inorder.length - 1, preorder, 0, preorder.length - 1);
+    }
+
+    public TreeNode constructBinaryTreeFromPostOrder(int[] postorder, int[] inorder) {
+        return makeBinaryTreeFromPostOrder(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+    }
+
+    private TreeNode makeBinaryTreeFromPostOrder(int[] inorder, int i, int i1, int[] postorder, int i2, int i3) {
+        if (i > i1) {
+            return null;
+        }
+        int root = postorder[i3];
+        int rootIndex = -1;
+        for (int j = i; j <= i1; j++) {
+            if (inorder[j] == root) {
+                rootIndex = j;
+                break;
+            }
+        }
+        TreeNode t = new TreeNode(root);
+        t.left = makeBinaryTreeFromPostOrder(inorder, i, rootIndex - 1, postorder, i2, i2 + rootIndex - i - 1);
+        t.right = makeBinaryTreeFromPostOrder(inorder, rootIndex + 1, i1, postorder, i2 + rootIndex - i, i3 - 1);
+        return t;
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
+        if (root == null || root == a || root == b) {
+            return root;
+        }
+        TreeNode l = lowestCommonAncestor(root.left, a, b);
+        TreeNode r = lowestCommonAncestor(root.right, a, b);
+        if (l != null && r != null) {
+            return root;
+        }
+        return l != null ? l : r;
+    }
 }
