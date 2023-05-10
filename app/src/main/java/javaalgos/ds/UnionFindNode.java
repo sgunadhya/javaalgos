@@ -2,7 +2,9 @@ package javaalgos.ds;
 
 import javaalgos.adt.PartitionElement;
 
-public class UnionFindNode<T> implements PartitionElement<T> {
+import java.util.Comparator;
+
+public class UnionFindNode<T extends Comparable<T>> implements PartitionElement<T> {
     UnionFindNode<T> parentNode;
     int rank;
     T data;
@@ -28,25 +30,27 @@ public class UnionFindNode<T> implements PartitionElement<T> {
     }
 
     @Override
+    public PartitionElement<T> union(PartitionElement<T> x, Comparator<? super T> comparator) {
+        if(x == null) {
+            return this;
+        }
+        UnionFindNode<T> xRep = (UnionFindNode<T>) x.findRepresentative();
+        UnionFindNode<T> thisRep = (UnionFindNode<T>) this.findRepresentative();
+        if(xRep == thisRep) {
+            return thisRep;
+        }
+        if(comparator.compare(xRep.data, thisRep.data) < 0) {
+            xRep.parentNode = thisRep;
+            return thisRep;
+        }else {
+            thisRep.parentNode = xRep;
+            return xRep;
+        }
+    }
+
+    @Override
     public PartitionElement<T> union(PartitionElement<T> x) {
-        if(!(x instanceof UnionFindNode)){
-            throw new IllegalArgumentException();
-        }
-        UnionFindNode<T> representativeOther = (UnionFindNode<T>) x.findRepresentative();
-        UnionFindNode<T> representativeThis = (UnionFindNode<T>) this.findRepresentative();
-        if(representativeOther == representativeThis) {
-            return representativeOther;
-        }
-        if(representativeOther.rank > representativeThis.rank) {
-            representativeThis.parentNode = representativeOther;
-            return representativeOther;
-        }else{
-            representativeOther.parentNode = representativeThis;
-            if(representativeOther.rank == representativeThis.rank) {
-                representativeThis.rank++;
-            }
-            return representativeThis;
-        }
+        return union(x, Comparator.naturalOrder()) ;
     }
 
     @Override

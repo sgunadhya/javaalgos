@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Comparator;
+
 
 public class UnionFindNodeTest extends TestCase {
 
@@ -38,6 +40,11 @@ public class UnionFindNodeTest extends TestCase {
             @Override
             public boolean sameComponent(PartitionElement<Integer> x) {
                 return false;
+            }
+
+            @Override
+            public PartitionElement<Integer> union(PartitionElement<Integer> x, Comparator<? super Integer> comparator) {
+                return null;
             }
 
             @Override

@@ -1,149 +1,141 @@
 package javaalgos.adt;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.RandomAccess;
 
-public class SuffixArray {
-    private int[] suffixArray;
-    private CharSequence text;
+/**
+ * Class representing a suffix array.
+ */
+public class SuffixArray implements RandomAccess {
+    private final String text;
+    private final int[] suffixArray;
 
-    public SuffixArray(CharSequence text) {
+    /**
+     * Constructs a suffix array from a given string.
+     *
+     * @param text the string to construct the suffix array from
+     */
+    public SuffixArray(String text) {
         this.text = text;
-        suffixArray = new int[text.length()];
+        this.suffixArray = new int[text.length()];
         for (int i = 0; i < text.length(); i++) {
             suffixArray[i] = i;
         }
         sort(0, text.length() - 1, 0);
     }
 
-    private int charAt(int index, int offset) {
-        return index + offset < text.length() ? text.charAt(index + offset) : -1;
-    }
-
-    private void sort(int lo, int hi, int offset) {
+    private void sort(int lo, int hi, int d) {
         if (hi <= lo) {
             return;
         }
         int lt = lo;
         int gt = hi;
-        int v = charAt(suffixArray[lo], offset);
+        int pivot = charAt(suffixArray[lo], d);
         int i = lo + 1;
         while (i <= gt) {
-            int t = charAt(suffixArray[i], offset);
-            if (t < v) {
+            int c = charAt(suffixArray[i], d);
+            if (c < pivot) {
                 exchange(lt++, i++);
-            } else if (t > v) {
+            } else if (c > pivot) {
                 exchange(i, gt--);
             } else {
                 i++;
             }
         }
-        sort(lo, lt - 1, offset);
-        if (v >= 0) {
-            sort(lt, gt, offset + 1);
+        sort(lo, lt - 1, d);
+        if (pivot >= 0) {
+            sort(lt, gt, d + 1);
         }
-        sort(gt + 1, hi, offset);
+        sort(gt + 1, hi, d);
     }
 
-    private void exchange(int i, int j) {
+    private void exchange(int i, int i1) {
         int temp = suffixArray[i];
-        suffixArray[i] = suffixArray[j];
-        suffixArray[j] = temp;
+        suffixArray[i] = suffixArray[i1];
+        suffixArray[i1] = temp;
     }
 
-    public int length() {
-        return suffixArray.length;
+    private int charAt(int i, int d) {
+        return i + d < text.length() ? text.charAt(i + d) : -1;
     }
 
-    public int index(int i) {
-        if (i < 0 || i >= suffixArray.length) {
-            throw new IndexOutOfBoundsException();
+    public int[] lcp() {
+        int[] lcp = new int[text.length()];
+        int[] rank = new int[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            rank[suffixArray[i]] = i;
         }
-        return suffixArray[i];
-    }
-
-    public int lcp(int i) {
-        if (i < 1 || i >= suffixArray.length) {
-            throw new IndexOutOfBoundsException();
-        }
-        return lcp(suffixArray[i], suffixArray[i - 1]);
-    }
-
-    private int lcp(int i, int j) {
-        int length = 0;
-        while (i < text.length() && j < text.length()) {
-            if (text.charAt(i) != text.charAt(j)) {
-                return length;
+        int h = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (rank[i] == text.length() - 1) {
+                h = 0;
+                continue;
             }
-            i++;
-            j++;
-            length++;
+            int j = suffixArray[rank[i] + 1];
+            while (i + h < text.length() && j + h < text.length() && text.charAt(i + h) == text.charAt(j + h)) {
+                h++;
+            }
+            lcp[rank[i]] = h;
+            if (h > 0) {
+                h--;
+            }
         }
-        return length;
+        return lcp;
     }
 
-    public CharSequence select(int i) {
-        if (i < 0 || i >= suffixArray.length) {
-            throw new IndexOutOfBoundsException();
+    /**
+     * Return longest repeating substring.
+     */
+    public String longestRepeatingSubstring() {
+        int[] lcp = lcp();
+        int max = 0;
+        int index = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (lcp[i] > max) {
+                max = lcp[i];
+                index = i;
+            }
         }
-        return text.subSequence(suffixArray[i], text.length());
+        return text.substring(suffixArray[index], suffixArray[index] + max);
     }
 
-    public int rank(CharSequence query) {
+    /**
+     * Find the index of matching substring.
+     */
+
+    public int indexOf(String s) {
         int lo = 0;
-        int hi = suffixArray.length - 1;
+        int hi = text.length() - 1;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            int cmp = compare(query, suffixArray[mid]);
+            int cmp = text.substring(suffixArray[mid]).compareTo(s);
             if (cmp < 0) {
-                hi = mid - 1;
-            } else if (cmp > 0) {
                 lo = mid + 1;
+            } else if (cmp > 0) {
+                hi = mid - 1;
             } else {
                 return mid;
             }
         }
-        return lo;
+        return -1;
     }
 
-    private int compare(CharSequence query, int index) {
-        int i = 0;
-        int j = index;
-        while (i < query.length() && j < text.length()) {
-            if (query.charAt(i) != text.charAt(j)) {
-                return query.charAt(i) - text.charAt(j);
-            }
-            i++;
-            j++;
-        }
-        return query.length() - (j - index);
+    /**
+     * Returns the length of the string this suffix array was constructed from.
+     *
+     * @return the length of the string this suffix array was constructed from
+     */
+    public int length() {
+        return text.length();
     }
 
-    public int count(String query) {
-        int lo = rank(query);
-        int hi = rank(query + Character.MAX_VALUE);
-        return hi - lo;
+    /**
+     * Returns the index of the i-th suffix.
+     *
+     * @param i the index of the suffix to return
+     * @return the index of the i-th suffix
+     */
+    public int index(int i) {
+        return suffixArray[i];
     }
 
-    public Iterable<Integer> search(String query) {
-        Queue<Integer> queue = new LinkedList<>();
-        int lo = rank(query);
-        int hi = rank(query + Character.MAX_VALUE);
-        for (int i = lo; i < hi; i++) {
-            queue.offer(suffixArray[i]);
-        }
-        return queue;
-    }
-
-    public static void main(String[] args) {
-        SuffixArray suffixArray = new SuffixArray("banana");
-        for (int i = 0; i < suffixArray.length(); i++) {
-            System.out.println(suffixArray.select(i));
-        }
-        System.out.println(suffixArray.rank("ana"));
-        System.out.println(suffixArray.count("ana"));
-        for (int index : suffixArray.search("ana")) {
-            System.out.println(index);
-        }
-    }
 }

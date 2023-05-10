@@ -23,6 +23,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:29.0-jre")
+    implementation("org.jgrapht:jgrapht-core:1.5.2")
 }
 
 application {

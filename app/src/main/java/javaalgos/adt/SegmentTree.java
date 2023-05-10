@@ -1,6 +1,6 @@
 package javaalgos.adt;
 
-public class SegmentTree<T extends Comparable>{
+public class SegmentTree<T extends Comparable<T>>{
     private T[] tree;
     private T[] array;
     private int capacity;
@@ -28,14 +28,14 @@ public class SegmentTree<T extends Comparable>{
     public T rangeMax(int l, int r) {
         l += capacity;
         r += capacity;
-        T max = null;
+        T max = tree[l];
         while (l <= r) {
             if (l % 2 == 1) {
-                max = max == null ? tree[l] : max(max, tree[l]);
+                max = max(max, tree[l]);
                 l++;
             }
             if (r % 2 == 0) {
-                max = max == null ? tree[r] : max(max, tree[r]);
+                max = max(max, tree[r]);
                 r--;
             }
             l /= 2;
